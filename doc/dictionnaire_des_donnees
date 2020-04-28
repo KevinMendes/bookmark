@@ -1,0 +1,60 @@
+# Dictionnaire de données
+
+## User (`user`)
+
+|name|Type| Specificités |Description|
+|-|-|-|-|
+|id| INT | PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT | Identifiant de l'user |
+|surname| CHAR(20) | NOT NULL| Pseudo |
+|name| VARCHAR(255) | NOT NULL | Nom de l'user ||
+|email| STRING | NULL | Email de l'user |
+|password| STRING | NOT NULL | Mot de passe du compte |
+|created_at| TIMESTAMP|NOT NULL, DEFAULT CURRENT_TIMESTAMP| date de création|
+
+
+
+## Tags (`tag`)
+
+|name|Type|Specifications|Description|
+|-|-|-|-|
+|id| INT | PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT | Identifiant du tag |
+|tag| CHAR(20) | NOT NULL | Nom du tag |
+
+## List Video (`listvideo`)
+
+|id| INT | PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT | Identifiant de l'user |
+|liens| VARCHAR(255) | NOT NULL | Lien du média |
+|titre| VARCHAR(255) | NOT NULL | Titre du média |
+|auteur| VARCHAR(255) | NOT NULL | auteur du média |
+|largeur|  | NOT NULL | largeur du média |
+|hauteur|  | NOT NULL | hauteur du media |
+|duree | INT | NOT NULL | Durée de la video |
+|user_id|  | NOT NULL | Clef étrangère référence à l'user |
+|created_at| TIMESTAMP |NOT NULL, DEFAULT CURRENT_TIMESTAMP|date de création|
+|updated_at| TIMESTAMP | NULL | date de l'update|
+
+## List Image (`listImage`)
+
+|id| INT | PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT | Identifiant de l'user |
+|liens| VARCHAR(255) | NOT NULL | Lien du média |
+|titre| VARCHAR(255) | NOT NULL | Titre du média |
+|auteur| VARCHAR(255) | NOT NULL | auteur du média |
+|largeur|  | NOT NULL | largeur du média |
+|hauteur|  | NOT NULL | hauteur du media |
+|user_id|  | NOT NULL | Clef étrangère référence à l'user |
+|created_at| TIMESTAMP |NOT NULL, DEFAULT CURRENT_TIMESTAMP|date de création|
+|updated_at| TIMESTAMP | NULL | date de l'update|
+
+## Table many to many entre list_video et tags (`list_video_many_to_many_tags`)
+
+|name|Type|Specifications|Description|
+|-|-|-|-|
+|video_id|  INT | PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT | Clé étrangère du média |
+|tags_id| INT | PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT | Clé étrangère du tag |
+
+## Table many to many entre list_image et tags (`list_video_many_to_many_image`)
+
+|name|Type|Specifications|Description|
+|-|-|-|-|
+|image_id|  INT | PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT | Clé étrangère du média |
+|tags_id| INT | PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT | Clé étrangère du tag |

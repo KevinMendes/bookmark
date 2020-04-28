@@ -1,0 +1,138 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg width="379" height="515" view_box="0 0 379 515"
+xmlns="http://www.w3.org/2000/svg"
+xmlns:link="http://www.w3.org/1999/xlink">\n\n<desc>Généré par Mocodo 2.3.7 le Tue, 28 Apr 2020 01:10:59</desc>
+
+<rect id="frame" x="0" y="0" width="379" height="515" fill="#ffffbf" stroke="none" stroke-width="0"/>
+
+<!-- Association PEUT AVOIR(bis) -->
+<line x1="188" y1="472" x2="311" y2="388" stroke="#74add1" stroke-width="2"/>
+<text x="229" y="459.195100089" fill="#d73027" font-family="Verdana" font-size="12">N,N</text>
+<line x1="311" y1="228" x2="311" y2="388" stroke="#74add1" stroke-width="2"/>
+<text x="316.0" y="355" fill="#d73027" font-family="Verdana" font-size="12">N,N</text>
+<g id="association-PEUT AVOIR(bis)">
+	<path d="M 356 363 a 14 14 90 0 1 14 14 V 388 h -118 V 377 a 14 14 90 0 1 14 -14" fill="#abd9e9" stroke="#abd9e9" stroke-width="0"/>
+	<path d="M 370 388.0 v 11 a 14 14 90 0 1 -14 14 H 266 a 14 14 90 0 1 -14 -14 V 388.0 H 118" fill="#e0f3f8" stroke="#e0f3f8" stroke-width="0"/>
+	<rect x="252" y="363" width="118" height="50" fill="none" rx="14" stroke="#74add1" stroke-width="2"/>
+	<line x1="252" y1="388" x2="370" y2="388" stroke="#74add1" stroke-width="1"/>
+	<text x="259" y="380.7" fill="#000000" font-family="Verdana" font-size="12">PEUT AVOIR(bis)</text>
+</g>
+
+<!-- Association PEUT AVOIR -->
+<line x1="188" y1="472" x2="63" y2="388" stroke="#74add1" stroke-width="2"/>
+<text x="124" y="459.662012681" fill="#d73027" font-family="Verdana" font-size="12">N,N</text>
+<line x1="63" y1="228" x2="63" y2="388" stroke="#74add1" stroke-width="2"/>
+<text x="68.0" y="347" fill="#d73027" font-family="Verdana" font-size="12">N,N</text>
+<g id="association-PEUT AVOIR">
+	<path d="M 94 363 a 14 14 90 0 1 14 14 V 388 h -90 V 377 a 14 14 90 0 1 14 -14" fill="#abd9e9" stroke="#abd9e9" stroke-width="0"/>
+	<path d="M 108 388.0 v 11 a 14 14 90 0 1 -14 14 H 32 a 14 14 90 0 1 -14 -14 V 388.0 H 90" fill="#e0f3f8" stroke="#e0f3f8" stroke-width="0"/>
+	<rect x="18" y="363" width="90" height="50" fill="none" rx="14" stroke="#74add1" stroke-width="2"/>
+	<line x1="18" y1="388" x2="108" y2="388" stroke="#74add1" stroke-width="1"/>
+	<text x="25" y="380.7" fill="#000000" font-family="Verdana" font-size="12">PEUT AVOIR</text>
+</g>
+
+<!-- Association Possède_image -->
+<line x1="63" y1="228" x2="63" y2="68" stroke="#74add1" stroke-width="2"/>
+<text x="68.0" y="118" fill="#d73027" font-family="Verdana" font-size="12">1,1</text>
+<line x1="188" y1="68" x2="63" y2="68" stroke="#74add1" stroke-width="2"/>
+<text x="124" y="85.0" fill="#d73027" font-family="Verdana" font-size="12">1,1</text>
+<g id="association-Possède_image">
+	<path d="M 103 43 a 14 14 90 0 1 14 14 V 68 h -108 V 57 a 14 14 90 0 1 14 -14" fill="#abd9e9" stroke="#abd9e9" stroke-width="0"/>
+	<path d="M 117 68.0 v 11 a 14 14 90 0 1 -14 14 H 23 a 14 14 90 0 1 -14 -14 V 68.0 H 108" fill="#e0f3f8" stroke="#e0f3f8" stroke-width="0"/>
+	<rect x="9" y="43" width="108" height="50" fill="none" rx="14" stroke="#74add1" stroke-width="2"/>
+	<line x1="9" y1="68" x2="117" y2="68" stroke="#74add1" stroke-width="1"/>
+	<text x="16" y="60.7" fill="#000000" font-family="Verdana" font-size="12">Possède_image</text>
+</g>
+
+<!-- Association Possède_video -->
+<line x1="311" y1="228" x2="311" y2="68" stroke="#74add1" stroke-width="2"/>
+<text x="316.0" y="110" fill="#d73027" font-family="Verdana" font-size="12">1,1</text>
+<line x1="188" y1="68" x2="311" y2="68" stroke="#74add1" stroke-width="2"/>
+<text x="231" y="85.0" fill="#d73027" font-family="Verdana" font-size="12">1,1</text>
+<g id="association-Possède_video">
+	<path d="M 349 43 a 14 14 90 0 1 14 14 V 68 h -104 V 57 a 14 14 90 0 1 14 -14" fill="#abd9e9" stroke="#abd9e9" stroke-width="0"/>
+	<path d="M 363 68.0 v 11 a 14 14 90 0 1 -14 14 H 273 a 14 14 90 0 1 -14 -14 V 68.0 H 104" fill="#e0f3f8" stroke="#e0f3f8" stroke-width="0"/>
+	<rect x="259" y="43" width="104" height="50" fill="none" rx="14" stroke="#74add1" stroke-width="2"/>
+	<line x1="259" y1="68" x2="363" y2="68" stroke="#74add1" stroke-width="1"/>
+	<text x="266" y="60.7" fill="#000000" font-family="Verdana" font-size="12">Possède_video</text>
+</g>
+
+<!-- Entity List_Image -->
+<g id="entity-List_Image">
+	<g id="frame-List_Image">
+		<rect x="23" y="126" width="80" height="25" fill="#fdae61" stroke="#fdae61" stroke-width="0"/>
+		<rect x="23" y="151.0" width="80" height="179" fill="#fee090" stroke="#fee090" stroke-width="0"/>
+		<rect x="23" y="126" width="80" height="204" fill="none" stroke="#f46d43" stroke-width="2"/>
+		<line x1="23" y1="151" x2="103" y2="151" stroke="#f46d43" stroke-width="1"/>
+	</g>
+	<text x="29" y="143.7" fill="#000000" font-family="Verdana" font-size="12">List_Image</text>
+	<text x="28" y="168.7" fill="#000000" font-family="Verdana" font-size="12">id</text>
+	<line x1="28" y1="171" x2="40" y2="171" stroke="#000000" stroke-width="1"/>
+	<text x="28" y="185.7" fill="#000000" font-family="Verdana" font-size="12">tag_id</text>
+	<text x="28" y="202.7" fill="#000000" font-family="Verdana" font-size="12">liens</text>
+	<text x="28" y="219.7" fill="#000000" font-family="Verdana" font-size="12">titre</text>
+	<text x="28" y="236.8" fill="#000000" font-family="Verdana" font-size="12">auteur</text>
+	<text x="28" y="253.8" fill="#000000" font-family="Verdana" font-size="12">date_ajout</text>
+	<text x="28" y="270.8" fill="#000000" font-family="Verdana" font-size="12">largeur</text>
+	<text x="28" y="287.8" fill="#000000" font-family="Verdana" font-size="12">hauteur</text>
+	<text x="28" y="304.8" fill="#000000" font-family="Verdana" font-size="12">created_at</text>
+	<text x="28" y="321.8" fill="#000000" font-family="Verdana" font-size="12">updated_at</text>
+</g>
+
+<!-- Entity USER -->
+<g id="entity-USER">
+	<g id="frame-USER">
+		<rect x="150" y="9" width="76" height="25" fill="#fdae61" stroke="#fdae61" stroke-width="0"/>
+		<rect x="150" y="34.0" width="76" height="93" fill="#fee090" stroke="#fee090" stroke-width="0"/>
+		<rect x="150" y="9" width="76" height="118" fill="none" stroke="#f46d43" stroke-width="2"/>
+		<line x1="150" y1="34" x2="226" y2="34" stroke="#f46d43" stroke-width="1"/>
+	</g>
+	<text x="171" y="26.7" fill="#000000" font-family="Verdana" font-size="12">USER</text>
+	<text x="155" y="51.7" fill="#000000" font-family="Verdana" font-size="12">id</text>
+	<line x1="155" y1="54" x2="167" y2="54" stroke="#000000" stroke-width="1"/>
+	<text x="155" y="68.8" fill="#000000" font-family="Verdana" font-size="12">surname</text>
+	<text x="155" y="85.8" fill="#000000" font-family="Verdana" font-size="12">email</text>
+	<text x="155" y="102.8" fill="#000000" font-family="Verdana" font-size="12">password</text>
+	<text x="155" y="119.8" fill="#000000" font-family="Verdana" font-size="12">created_at</text>
+</g>
+
+<!-- Entity List_Video -->
+<g id="entity-List_Video">
+	<g id="frame-List_Video">
+		<rect x="271" y="118" width="80" height="25" fill="#fdae61" stroke="#fdae61" stroke-width="0"/>
+		<rect x="271" y="143.0" width="80" height="195" fill="#fee090" stroke="#fee090" stroke-width="0"/>
+		<rect x="271" y="118" width="80" height="220" fill="none" stroke="#f46d43" stroke-width="2"/>
+		<line x1="271" y1="143" x2="351" y2="143" stroke="#f46d43" stroke-width="1"/>
+	</g>
+	<text x="279" y="135.7" fill="#000000" font-family="Verdana" font-size="12">List_Video</text>
+	<text x="276" y="160.7" fill="#000000" font-family="Verdana" font-size="12">id</text>
+	<line x1="276" y1="163" x2="288" y2="163" stroke="#000000" stroke-width="1"/>
+	<text x="276" y="177.7" fill="#000000" font-family="Verdana" font-size="12">tag_id</text>
+	<text x="276" y="194.7" fill="#000000" font-family="Verdana" font-size="12">liens</text>
+	<text x="276" y="211.7" fill="#000000" font-family="Verdana" font-size="12">titre</text>
+	<text x="276" y="228.8" fill="#000000" font-family="Verdana" font-size="12">auteur</text>
+	<text x="276" y="245.8" fill="#000000" font-family="Verdana" font-size="12">date_ajout</text>
+	<text x="276" y="262.8" fill="#000000" font-family="Verdana" font-size="12">largeur</text>
+	<text x="276" y="279.8" fill="#000000" font-family="Verdana" font-size="12">hauteur</text>
+	<text x="276" y="296.8" fill="#000000" font-family="Verdana" font-size="12">duree</text>
+	<text x="276" y="313.8" fill="#000000" font-family="Verdana" font-size="12">created_at</text>
+	<text x="276" y="330.8" fill="#000000" font-family="Verdana" font-size="12">updated_at</text>
+</g>
+
+<!-- Entity TAGS -->
+<g id="entity-TAGS">
+	<g id="frame-TAGS">
+		<rect x="152" y="438" width="72" height="25" fill="#fdae61" stroke="#fdae61" stroke-width="0"/>
+		<rect x="152" y="463.0" width="72" height="43" fill="#fee090" stroke="#fee090" stroke-width="0"/>
+		<rect x="152" y="438" width="72" height="68" fill="none" stroke="#f46d43" stroke-width="2"/>
+		<line x1="152" y1="463" x2="224" y2="463" stroke="#f46d43" stroke-width="1"/>
+	</g>
+	<text x="171" y="455.7" fill="#000000" font-family="Verdana" font-size="12">TAGS</text>
+	<text x="157" y="480.8" fill="#000000" font-family="Verdana" font-size="12">id</text>
+	<line x1="157" y1="483" x2="169" y2="483" stroke="#000000" stroke-width="1"/>
+	<text x="157" y="497.8" fill="#000000" font-family="Verdana" font-size="12">tag_name</text>
+</g>
+</svg>

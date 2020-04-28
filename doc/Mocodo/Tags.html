@@ -1,0 +1,73 @@
+<html>
+<head>
+<meta charset='utf-8'>
+<style>
+  #mld .relation { font-variant: small-caps; font-weight: bold }
+  #mld .primary { text-decoration: underline }
+  #mld .foreign { font-style: oblique }
+  #mld .normal { }
+</style>
+</head>
+<body>
+<div id='mld'>
+<div>
+  <span class='relation'>USER</span> (
+    <span class='primary'>id</span>,
+    <span class='normal'>surname</span>,
+    <span class='normal'>email</span>,
+    <span class='normal'>password</span>,
+    <span class='normal'>created_at</span>
+  )
+</div>
+<div>
+  <span class='relation'>List_Image</span> (
+    <span class='primary'>id</span>,
+    <span class='normal'>tag_id</span>,
+    <span class='normal'>liens</span>,
+    <span class='normal'>titre</span>,
+    <span class='normal'>auteur</span>,
+    <span class='normal'>date_ajout</span>,
+    <span class='normal'>largeur</span>,
+    <span class='normal'>hauteur</span>,
+    <span class='normal'>created_at</span>,
+    <span class='normal'>updated_at</span>,
+    <span class='foreign'>id.1</span>
+  )
+</div>
+<div>
+  <span class='relation'>List_Video</span> (
+    <span class='primary'>id</span>,
+    <span class='normal'>tag_id</span>,
+    <span class='normal'>liens</span>,
+    <span class='normal'>titre</span>,
+    <span class='normal'>auteur</span>,
+    <span class='normal'>date_ajout</span>,
+    <span class='normal'>largeur</span>,
+    <span class='normal'>hauteur</span>,
+    <span class='normal'>duree</span>,
+    <span class='normal'>created_at</span>,
+    <span class='normal'>updated_at</span>,
+    <span class='foreign'>id.1</span>
+  )
+</div>
+<div>
+  <span class='relation'>PEUT AVOIR</span> (
+    <span class='foreign primary'>id</span>,
+    <span class='foreign primary'>id.1</span>
+  )
+</div>
+<div>
+  <span class='relation'>PEUT AVOIR(bis)</span> (
+    <span class='foreign primary'>id</span>,
+    <span class='foreign primary'>id.1</span>
+  )
+</div>
+<div>
+  <span class='relation'>TAGS</span> (
+    <span class='primary'>id</span>,
+    <span class='normal'>tag_name</span>
+  )
+</div>
+</div>
+</body>
+</html>

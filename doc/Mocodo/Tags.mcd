@@ -1,0 +1,14 @@
+Possède_image, 11 List_Image, 11 USER
+USER: id, surname, email, password, created_at
+Possède_video, 11 List_Video, 11 USER
+
+
+List_Image: id, tag_id, liens, titre, auteur, date_ajout, largeur, hauteur, created_at, updated_at
+:
+List_Video: id, tag_id, liens, titre, auteur, date_ajout, largeur, hauteur, duree, created_at, updated_at
+
+PEUT AVOIR, NN TAGS, NN List_Image
+:
+PEUT AVOIR(bis), NN TAGS, NN List_Video
+
+TAGS: id, tag_name
