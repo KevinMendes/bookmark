@@ -15,9 +15,6 @@ const Tag = sequelize.define(
             allowNull: false,
         },
     },
-    // Permet d'éviter les tables created_at & updated_at
-    // sur les tables many to many
-    { timestamps: false }
 );
 
 
