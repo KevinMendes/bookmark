@@ -4,14 +4,15 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const Sequelize = require("sequelize");
 // Code de sécurisation pour le token
-const SECRET = "fsd185fs181ezc1sq81ds51qc8sq1518";
+const SECRET = require("../utils/secret");
+console.log(SECRET);
 // Récupération du model
 const User = require("../models/User");
 
 exports.createAccount = async (req, res, next) => {
   const surname = body.req.surname;
-  const password = await bcrypt.hash(req.body.password, 12);
   const email = body.req.email;
+  const password = await bcrypt.hash(req.body.password, 12);
 
   // Vérification de l'existance de l'user dans la BDD
   const user = await User.findOne({ where: { email } });
@@ -76,18 +77,5 @@ exports.login = async (req, res, next) => {
         }
       );
     }
-  }
-};
-
-// Middleware servant à vérifier la présence du token
-// avant chaque action sur la BDD autre que la connexion
-exports.verifyToken = (req, res, next) => {
-  try {
-    let decoded = jwt.verify(token, SECRET, {
-      algorithme: ["HS256"],
-    });
-    console.log(decoded);
-  } catch (err) {
-    console.log(err, err.message);
   }
 };
