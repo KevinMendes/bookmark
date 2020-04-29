@@ -16,7 +16,7 @@ exports.createVideo = (req, res, next) => {
   const hauteur = req.body.hauteur;
   const largeur = req.body.largeur;
   const duree = req.body.duree;
-  const tagId = req.body.tagId;
+  const tagId = Array.from(req.body.tagId);
   const userId = req.body.userId;
   console.log(tagId);
   // Middleware servant à vérifier la présence du token
@@ -42,8 +42,15 @@ exports.createVideo = (req, res, next) => {
     userId: userId,
   })
     .then((result) => {
-      res.status(201).json({
-        result,
+      const interTable = tagId.map((id) =>
+        TagVideo.create({
+          tagId: id,
+          listvideoId: result.id,
+        })
+      );
+    })
+    .then(() => {
+      res.status(202).json({
         success: true,
       });
     })
@@ -54,7 +61,7 @@ exports.createVideo = (req, res, next) => {
 
 exports.destroyVideo = (req, res, next) => {
   id = req.body.id;
-  Video.destroy({ where: {id:id} })
+  Video.destroy({ where: { id: id } })
     .then((result) => {
       res.status(202).json({
         success: true,
