@@ -3,7 +3,7 @@ const express = require('express');
 const videoController = require('../controllers/listVideoController');
 
 // initialisation du router
-const router = express.Router()
+const router = express.Router();
 
 // création des routes
 router.post('/createVideo', videoController.createVideo);

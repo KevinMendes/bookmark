@@ -2,6 +2,8 @@
 const express = require('express');
 // import des routes
 const videoRoute = require('./routes/listVideo');
+const imageRoute = require('./routes/listImage');
+const tagRoute = require('./routes/tag');
 // Body parser pour parser les données de l'app front
 const bodyParser = require('body-parser');
 // Import de l'ORM
@@ -27,7 +29,8 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 //*****************************************************/
 //*******************ROUTAGE***************************/
 app.use('/Video', videoRoute);
-// app.use('/user', profileRoutes);
+app.use('/Image', imageRoute);
+app.use('/Tag', tagRoute);
 // app.use('/private', documentationRoutes);
 // app.use('/ticket', ticketRoutes);
 /******************************************************/

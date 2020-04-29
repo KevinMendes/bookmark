@@ -1,14 +1,23 @@
 // Import des modeles à utiliser
 const User = require("../models/User");
+const Image = require("../models/ListImage");
+const TagImage = require("../models/TagListImage");
 const Tag = require("../models/Tag");
-const ListVideo = require("../models/ListVideo");
-const ListImage = require("../models/ListImage");
+
 // import de la librairie de tocket et du SECRET
 const SECRET = require("../utils/secret");
 const jwt = require("jsonwebtoken");
 
-exports.createTag = (req, res, next) => {
-  const tag = req.body.tag;
+exports.createImage = (req, res, next) => {
+  console.log(req.body);
+  const lien = req.body.lien;
+  const titre = req.body.titre;
+  const auteur = req.body.auteur;
+  const hauteur = req.body.hauteur;
+  const largeur = req.body.largeur;
+  const tagId = Array.from(req.body.tagId);
+  const userId = req.body.userId;
+  console.log(tagId);
   // Middleware servant à vérifier la présence du token
   // avant chaque action sur la BDD autre que la connexion
   // jwt.verify = (req, res, next) => {
@@ -21,13 +30,25 @@ exports.createTag = (req, res, next) => {
   //     console.log(err, err.message);
   //     return false;
   //   }
-  // création de la ligne
-  Tag.create({
-    tag: tag,
+  // création de l'entrée dans la table listimage
+  Image.create({
+    lien: lien,
+    titre: titre,
+    auteur: auteur,
+    hauteur: hauteur,
+    largeur: largeur,
+    userId: userId,
   })
     .then((result) => {
-      res.status(201).json({
-        result,
+      const interTable = tagId.map((id) =>
+        TagImage.create({
+          tagId: id,
+          listimageId: result.id,
+        })
+      );
+    })
+    .then(() => {
+      res.status(202).json({
         success: true,
       });
     })
@@ -36,9 +57,9 @@ exports.createTag = (req, res, next) => {
     });
 };
 
-exports.destroyTag = (req, res, next) => {
+exports.destroyImage = (req, res, next) => {
   id = req.body.id;
-  Tag.destroy({ where: {id:id}})
+  Image.destroy({ where: { id: id } })
     .then((result) => {
       res.status(202).json({
         success: true,
@@ -46,30 +67,27 @@ exports.destroyTag = (req, res, next) => {
     })
     .catch((err) => {
       console.log(err.message);
-
     });
 };
-// récupération de toutes les Tags bookmark & tag associé
-exports.allTag = (req, res, next) => {
-  userId = req.body.userId;
-  Tag.findAll({
+
+// récupération de toutes les images bookmark & tag associé
+exports.allImage = (req, res, next) => {
+  const userId = req.body.userId;
+  Image.findAll({
+    where: {
+      userId: userId,
+    },
     attributes: [
       "lien",
       "titre",
       "auteur",
       "hauteur",
       "largeur",
-      "duree",
       "createdAt",
     ],
     include: [
       {
-        model: ListVideo,
-        where: { userId: userId },
-      },
-      {
-        model: ListImage,
-        where: { userId: userId },
+        model: Tag,
       },
     ],
   })
@@ -82,23 +100,3 @@ exports.allTag = (req, res, next) => {
       console.log(err.message);
     });
 };
-
-exports.updateTag = (req, res, next) => {
-    const tagId = req.body.tagId;
-    const newTag = req.body.newTag;
-    Tag.update(
-    {
-      tag: newTag,
-    },
-    {
-      where: { id: tagId }
-    }
-    ).then(tag => {
-        res.status(202).json({
-            message: "updated",
-            tag
-        })
-    }).catch(err => {
-        console.log(err.message)
-    })
-}
