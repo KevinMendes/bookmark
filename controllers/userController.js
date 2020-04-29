@@ -10,15 +10,15 @@ console.log(SECRET);
 const User = require("../models/User");
 
 exports.createAccount = async (req, res, next) => {
-  const surname = body.req.surname;
-  const email = body.req.email;
+  const surname = req.body.surname;
+  const email = req.body.email;
   const password = await bcrypt.hash(req.body.password, 12);
-
+  console.log(req.body)
   // Vérification de l'existance de l'user dans la BDD
-  const user = await User.findOne({ where: { email } });
+  const user = await User.findOne({ where: { email: email } });
   if (user) {
     if (user.email == email) {
-      res.status(200).json({
+      res.status(201).json({
         success: false,
         message: "Email existant",
         email: email,
@@ -32,7 +32,7 @@ exports.createAccount = async (req, res, next) => {
       password: password,
       email: email,
     })
-      .then((res) => {
+      .then(result => {
         res.status(200).json({
           success: true,
           message: "Utilisateur créé",
@@ -77,5 +77,7 @@ exports.login = async (req, res, next) => {
         }
       );
     }
+  } catch(err) {
+    console.log(err.message)
   }
 };
