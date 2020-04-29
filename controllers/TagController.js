@@ -1,3 +1,5 @@
+// Import de OP permettant l'utilisation d'opérateur logique sql
+const { Op } = require("sequelize");
 // Import des modeles à utiliser
 const User = require("../models/User");
 const Tag = require("../models/Tag");
@@ -37,8 +39,9 @@ exports.createTag = (req, res, next) => {
 };
 
 exports.destroyTag = (req, res, next) => {
-  id = req.body.id;
-  Tag.destroy({ where: {id:id}})
+  id = req.body.tagId;
+  console.log(id);
+  Tag.destroy({ where: { id: id } })
     .then((result) => {
       res.status(202).json({
         success: true,
@@ -46,32 +49,25 @@ exports.destroyTag = (req, res, next) => {
     })
     .catch((err) => {
       console.log(err.message);
-
     });
 };
 // récupération de toutes les Tags bookmark & tag associé
 exports.allTag = (req, res, next) => {
   userId = req.body.userId;
   Tag.findAll({
-    attributes: [
-      "lien",
-      "titre",
-      "auteur",
-      "hauteur",
-      "largeur",
-      "duree",
-      "createdAt",
-    ],
-    include: [
-      {
-        model: ListVideo,
-        where: { userId: userId },
-      },
-      {
-        model: ListImage,
-        where: { userId: userId },
-      },
-    ],
+    attributes: ["tag", "id"],
+    [Op.and]: [{
+      include: [
+        ({
+          model: ListVideo,
+          where: { userId: userId },
+        },
+        {
+          model: ListImage,
+          where: { userId: userId },
+        })
+      ],
+    }],
   })
     .then((result) => {
       res.status(202).json({
@@ -84,21 +80,23 @@ exports.allTag = (req, res, next) => {
 };
 
 exports.updateTag = (req, res, next) => {
-    const tagId = req.body.tagId;
-    const newTag = req.body.newTag;
-    Tag.update(
+  const tagId = req.body.tagId;
+  const newTag = req.body.newTag;
+  Tag.update(
     {
       tag: newTag,
     },
     {
-      where: { id: tagId }
+      where: { id: tagId },
     }
-    ).then(tag => {
-        res.status(202).json({
-            message: "updated",
-            tag
-        })
-    }).catch(err => {
-        console.log(err.message)
+  )
+    .then((tag) => {
+      res.status(202).json({
+        message: "updated",
+        tag,
+      });
     })
-}
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
