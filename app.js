@@ -1,7 +1,7 @@
 // import de express pour créer un serveur plus facilement
 const express = require('express');
 // import des routes
-// const exampleRoutes = require('./routes/exemple');
+const videoRoute = require('./routes/listVideo');
 // Body parser pour parser les données de l'app front
 const bodyParser = require('body-parser');
 // Import de l'ORM
@@ -19,12 +19,14 @@ const TagListVideo = require('./models/TagListVideo');
 
 const app = express();
 // Utilisation de bodyparser
-app.use(bodyParser.json());
+// On limite toutes entrées à 10mb
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 
 
 //*****************************************************/
 //*******************ROUTAGE***************************/
-// app.use('/example', exampleRoutes);
+app.use('/Video', videoRoute);
 // app.use('/user', profileRoutes);
 // app.use('/private', documentationRoutes);
 // app.use('/ticket', ticketRoutes);
@@ -36,9 +38,8 @@ app.use(bodyParser.json());
 //**********Table Many to Many**************/
 
 // La table Tag est lié à listvideo et listimage à travers les tables intermédiaires
-Tag.belongsToMany(ListVideo, { through: TagListVideo });
-Tag.belongsToMany(ListImage, { through: TagListImage });
-
+ListVideo.belongsToMany(Tag, { through: TagListVideo });
+ListImage.belongsToMany(Tag, { through: TagListImage });
 /***************************************************/
 /********************One to One*********************/
 
@@ -54,10 +55,10 @@ sequelize.sync(
     {
         // force à true permet de forcer la réinitialisation complète des tables -> cela permet de drop toutes
         // les tables puis de les créer à nouveau décotter uniquement pour reset!
-        // force: true
+    // force: true
     }).then(
     result => {
-        // console.log(result);
+        // on écoute sur le port 8000
         app.listen(8000);
     }
 )

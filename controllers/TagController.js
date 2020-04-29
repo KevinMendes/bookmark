@@ -1,24 +1,14 @@
 // Import des modeles à utiliser
 const User = require("../models/User");
-const Video = require("../models/ListVideo");
-const TagVideo = require("../models/TagListVideo");
 const Tag = require("../models/Tag");
-
+const ListVideo = require("../models/ListVideo");
+const ListImage = require("../models/ListImage");
 // import de la librairie de tocket et du SECRET
 const SECRET = require("../utils/secret");
 const jwt = require("jsonwebtoken");
 
-exports.createVideo = (req, res, next) => {
-  console.log(req.body);
-  const lien = req.body.lien;
-  const titre = req.body.titre;
-  const auteur = req.body.auteur;
-  const hauteur = req.body.hauteur;
-  const largeur = req.body.largeur;
-  const duree = req.body.duree;
-  const tagId = req.body.tagId;
-  const userId = req.body.userId;
-  console.log(tagId);
+exports.createTag = (req, res, next) => {
+  const tag = req.body.tag;
   // Middleware servant à vérifier la présence du token
   // avant chaque action sur la BDD autre que la connexion
   // jwt.verify = (req, res, next) => {
@@ -31,15 +21,9 @@ exports.createVideo = (req, res, next) => {
   //     console.log(err, err.message);
   //     return false;
   //   }
-  // création de l'entrée dans la table listvideo
-  Video.create({
-    lien: lien,
-    titre: titre,
-    auteur: auteur,
-    hauteur: hauteur,
-    largeur: largeur,
-    duree: duree,
-    userId: userId,
+  // création de la ligne
+  Tag.create({
+    tag: tag,
   })
     .then((result) => {
       res.status(201).json({
@@ -52,9 +36,9 @@ exports.createVideo = (req, res, next) => {
     });
 };
 
-exports.destroyVideo = (req, res, next) => {
+exports.destroyTag = (req, res, next) => {
   id = req.body.id;
-  Video.destroy({ where: {id:id} })
+  Tag.destroy({ where: {id:id}})
     .then((result) => {
       res.status(202).json({
         success: true,
@@ -62,16 +46,13 @@ exports.destroyVideo = (req, res, next) => {
     })
     .catch((err) => {
       console.log(err.message);
+
     });
 };
-
-// récupération de toutes les videos bookmark & tag associé
-exports.allVideo = (req, res, next) => {
-  const userId = req.body.userId;
-  Video.findAll({
-    where: {
-      userId: userId,
-    },
+// récupération de toutes les Tags bookmark & tag associé
+exports.allTag = (req, res, next) => {
+  userId = req.body.userId;
+  Tag.findAll({
     attributes: [
       "lien",
       "titre",
@@ -83,7 +64,12 @@ exports.allVideo = (req, res, next) => {
     ],
     include: [
       {
-        model: Tag,
+        model: ListVideo,
+        where: { userId: userId },
+      },
+      {
+        model: ListImage,
+        where: { userId: userId },
       },
     ],
   })
@@ -96,3 +82,23 @@ exports.allVideo = (req, res, next) => {
       console.log(err.message);
     });
 };
+
+exports.updateTag = (req, res, next) => {
+    const tagId = req.body.tagId;
+    const newTag = req.body.newTag;
+    Tag.update(
+    {
+      tag: newTag,
+    },
+    {
+      where: { id: tagId }
+    }
+    ).then(tag => {
+        res.status(202).json({
+            message: "updated"
+            tag
+        })
+    }).catch(err => {
+        console.log(err.message)
+    })
+}

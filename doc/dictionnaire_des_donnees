@@ -9,7 +9,7 @@
 |name| VARCHAR(255) | NOT NULL | Nom de l'user ||
 |email| STRING | NULL | Email de l'user |
 |password| STRING | NOT NULL | Mot de passe du compte |
-|created_at| TIMESTAMP|NOT NULL, DEFAULT CURRENT_TIMESTAMP| date de création|
+|createdAt| TIMESTAMP|NOT NULL, DEFAULT CURRENT_TIMESTAMP| date de création|
 
 
 
@@ -30,7 +30,7 @@
 |hauteur|  | NOT NULL | hauteur du media |
 |duree | INT | NOT NULL | Durée de la video |
 |user_id|  | NOT NULL | Clef étrangère référence à l'user |
-|created_at| TIMESTAMP |NOT NULL, DEFAULT CURRENT_TIMESTAMP|date de création|
+|createdAt| TIMESTAMP |NOT NULL, DEFAULT CURRENT_TIMESTAMP|date de création|
 |updated_at| TIMESTAMP | NULL | date de l'update|
 
 ## List Image (`listImage`)
@@ -42,7 +42,7 @@
 |largeur|  | NOT NULL | largeur du média |
 |hauteur|  | NOT NULL | hauteur du media |
 |user_id|  | NOT NULL | Clef étrangère référence à l'user |
-|created_at| TIMESTAMP |NOT NULL, DEFAULT CURRENT_TIMESTAMP|date de création|
+|createdAt| TIMESTAMP |NOT NULL, DEFAULT CURRENT_TIMESTAMP|date de création|
 |updated_at| TIMESTAMP | NULL | date de l'update|
 
 ## Table many to many entre list_video et tags (`list_video_many_to_many_tags`)
