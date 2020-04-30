@@ -37,7 +37,7 @@ button {
 .pagination {
   text-align: center;
 }
-@media (min-width: 500px) {
+@media (min-width: 769px) {
   p {
     margin: 3px 2vh;
   }
@@ -73,7 +73,7 @@ button {
 
   .list-wrap {
     width: 50vw;
-    height: 18vh;
+    height: 20vh;
     border: solid olivedrab 1px;
     display: flex;
     flex-direction: column;
