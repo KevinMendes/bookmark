@@ -1,7 +1,11 @@
 p {
   margin: 3px;
 }
-
+.form-wrap {
+  display:flex;
+  justify-content: space-around;
+  margin: 25vh 0;
+}
 .App-header {
   background-color: #282c34;
   min-height: 5vh;

@@ -1,5 +1,7 @@
 // import de express pour créer un serveur plus facilement
 const express = require("express");
+// librarie de gestion des cors
+const cors = require("cors");
 // import des routes
 const videoRoute = require("./routes/listVideo");
 const imageRoute = require("./routes/listImage");
@@ -21,6 +23,8 @@ const TagListVideo = require("./models/TagListVideo");
 /******************************************************/
 
 const app = express();
+// Utilisation du module de gestion des cors
+app.use(cors({credentials: true, origin: true}));
 // Utilisation de bodyparser
 // On limite toutes entrées à 10mb
 app.use(bodyParser.json({ limit: "10mb" }));

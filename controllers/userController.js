@@ -13,7 +13,7 @@ exports.createAccount = async (req, res, next) => {
   const surname = req.body.surname;
   const email = req.body.email;
   const password = await bcrypt.hash(req.body.password, 12);
-  console.log(req.body)
+  console.log(req.body);
   // Vérification de l'existance de l'user dans la BDD
   const user = await User.findOne({ where: { email: email } });
   if (user) {
@@ -32,7 +32,7 @@ exports.createAccount = async (req, res, next) => {
       password: password,
       email: email,
     })
-      .then(result => {
+      .then((result) => {
         res.status(200).json({
           success: true,
           message: "Utilisateur créé",
@@ -45,8 +45,9 @@ exports.createAccount = async (req, res, next) => {
 
 exports.login = async (req, res, next) => {
   const email = req.body.email;
-  const password = req.body.password;
-  const user = await User.findOne({ where: { email } });
+  const password = await req.body.password;
+  console.log(typeof password, password);
+  const user = await User.findOne({ where: { email: email } });
   try {
     if (!user) {
       res.status(200).json({
@@ -55,16 +56,18 @@ exports.login = async (req, res, next) => {
       });
     }
     const valid = await bcrypt.compare(password, user.password);
+    console.log(password, user.password);
     if (!valid) {
       res.status(200).json({
         success: false,
-        message: "Mot de passe incorrect",
+        message: "Veuillez vérifier votre email et votre mot de passe",
       });
     }
     if (user && valid) {
       jwt.sign(
         {
           email: user.email,
+          surname: user.surname,
           userId: user.id,
         },
         SECRET,
@@ -77,7 +80,7 @@ exports.login = async (req, res, next) => {
         }
       );
     }
-  } catch(err) {
-    console.log(err.message)
+  } catch (err) {
+    console.log(err.message);
   }
 };
