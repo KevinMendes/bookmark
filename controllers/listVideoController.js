@@ -19,6 +19,19 @@ exports.createVideo = (req, res, next) => {
   const tagId = Array.from(req.body.tagId);
   const userId = req.body.userId;
   console.log(tagId);
+  // Middleware servant à vérifier la présence du token
+  // avant chaque action sur la BDD autre que la connexion
+  jwt.verify = (req, res, next) => {
+    try {
+      let decoded = jwt.verify(token, SECRET, {
+        algorithme: ["HS256"],
+      });
+      console.log(decoded);
+    } catch (err) {
+      console.log(err, err.message);
+      return false;
+    }
+  }
   // création de l'entrée dans la table listvideo
   Video.create({
     lien: lien,
