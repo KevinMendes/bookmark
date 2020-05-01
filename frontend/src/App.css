@@ -28,7 +28,7 @@ button {
 
 .list-wrap {
   width: 100vw;
-  height: 20vh;
+  height: 25vh;
   border: solid olivedrab 1px;
 }
 .bottom-wrap {
@@ -77,7 +77,7 @@ button {
 
   .list-wrap {
     width: 50vw;
-    height: 20vh;
+    height: 22vh;
     border: solid olivedrab 1px;
     display: flex;
     flex-direction: column;

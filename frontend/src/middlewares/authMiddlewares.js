@@ -5,6 +5,7 @@ import { loadLists } from '../actions/lists';
 import {
   LOGIN,
   LOGOUT,
+  CHECK_LOGGED,
   setAuthUser,
   handleGetUser,
   GET_USER,
@@ -35,6 +36,13 @@ const ajaxMiddleware = (store) => (next) => (action) => {
   let token = localStorage.getItem('token');
   // En fonction de l'action, je réagis
   switch (action.type) {
+    case CHECK_LOGGED: {
+      if (state.auth.token) {
+        const decryptToken = jwt(token);
+        store.dispatch(handleGetUser(decryptToken.userId));
+      }
+      break;
+    }
     case LOGIN: {
       axios({
         method: 'post',

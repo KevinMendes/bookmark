@@ -5,8 +5,10 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import store from './store';
 import App from './containers/App';
+import { checkLogged } from './actions/auth';
 import * as serviceWorker from './serviceWorker';
 
+store.dispatch(checkLogged());
 
 ReactDOM.render(
   <React.StrictMode>
