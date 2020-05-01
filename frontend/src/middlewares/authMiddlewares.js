@@ -44,6 +44,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
+          console.log(response.data, response);
           token = response.data.token;
           const decryptToken = jwt(token);
           localStorage.setItem('token', token);

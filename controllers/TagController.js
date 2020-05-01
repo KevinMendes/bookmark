@@ -6,7 +6,7 @@ const Tag = require("../models/Tag");
 const ListVideo = require("../models/ListVideo");
 const ListImage = require("../models/ListImage");
 // import de la librairie de tocket et du SECRET
-const SECRET = require("../utils/secret");
+const SECRET = "aslkdjlkaj10830912039jlkoaiuwerasdjflkasd";
 const jwt = require("jsonwebtoken");
 
 exports.createTag = (req, res, next) => {

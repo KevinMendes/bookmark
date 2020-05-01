@@ -4,16 +4,15 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const Sequelize = require("sequelize");
 // Code de sécurisation pour le token
-const SECRET = require("../utils/secret");
-console.log(SECRET);
+const SECRET = "aslkdjlkaj10830912039jlkoaiuwerasdjflkasd";
 // Récupération du model
 const User = require("../models/User");
+
 
 exports.createAccount = async (req, res, next) => {
   const surname = req.body.surname;
   const email = req.body.email;
   const password = await bcrypt.hash(req.body.password, 12);
-  console.log(req.body);
   // Vérification de l'existance de l'user dans la BDD
   const user = await User.findOne({ where: { email: email } });
   if (user) {
@@ -46,7 +45,6 @@ exports.createAccount = async (req, res, next) => {
 exports.login = async (req, res, next) => {
   const email = req.body.email;
   const password = await req.body.password;
-  console.log(typeof password, password);
   const user = await User.findOne({ where: { email: email } });
   try {
     if (!user) {
@@ -56,7 +54,6 @@ exports.login = async (req, res, next) => {
       });
     }
     const valid = await bcrypt.compare(password, user.password);
-    console.log(password, user.password);
     if (!valid) {
       res.status(200).json({
         success: false,
@@ -64,18 +61,14 @@ exports.login = async (req, res, next) => {
       });
     }
     if (user && valid) {
+      var token2 = jwt.sign({foo: 'bar'}, 'shhh');
       jwt.sign(
-        {
-          email: user.email,
-          surname: user.surname,
-          userId: user.id,
-        },
+        { userId: user.id, surname: user.surname, email: user.email },
         SECRET,
-        { expiresIn: "4h" },
         (err, token) => {
           res.status(200).json({
-            success: true,
             token,
+            success: true,
           });
         }
       );
