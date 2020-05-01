@@ -7,6 +7,7 @@ import { CHANGE_FIELD, SET_USER } from '../actions/auth';
 const initialState = {
   email: '',
   password: '',
+  verifPassword: '',
   isLogged: false,
   surname: '',
   userId: '',

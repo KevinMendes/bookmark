@@ -1,14 +1,15 @@
 import { connect } from 'react-redux';
 
-import LoginForm from '../component/loginform/LoginForm';
+import InscriptionForm from '../component/inscriptionForm/InscriptionForm';
 
-import { login, changeField } from '../actions/auth';
+import { createAccount, changeField } from '../actions/auth';
 
 // == Data / state
 const mapStateToProps = (state) => ({
   email: state.auth.email,
+  surname: state.auth.surname,
   password: state.auth.password,
-  isLogged: state.auth.isLogged,
+  verifPassword: state.auth.verifPassword,
 });
 
 // == Actions / dispatch
@@ -16,15 +17,15 @@ const mapDispatchToProps = (dispatch) => ({
   changeField: (value, name) => {
     dispatch(changeField(value, name));
   },
-  handleLogin: () => {
-    dispatch(login());
+  handleInscription: () => {
+    dispatch(createAccount());
   },
 });
 
 // création du lien : container
-const LoginFormContainer = connect(
+const InscriptionFormContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(LoginForm);
+)(InscriptionForm);
 
-export default LoginFormContainer;
+export default InscriptionFormContainer;

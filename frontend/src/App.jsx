@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 // Import des components
 import Navbar from './component/navbar/navbar';
 import LoginForm from './containers/LoginForm';
-import InscriptionForm from './component/inscriptionForm/InscriptionForm';
+import InscriptionForm from './containers/InscriptionForm';
 import './App.css';
 
 const App = ({ loading, isLogged }) => {

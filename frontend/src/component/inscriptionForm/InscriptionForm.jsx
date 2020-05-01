@@ -9,7 +9,7 @@ const InscriptionForm = ({
   verifPassword,
   changeField,
   handleInscription,
-  pseudo,
+  surname,
 }) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -21,10 +21,10 @@ const InscriptionForm = ({
       <h1>Inscription</h1>
       <form autoComplete="off" className="inscription-form-element" onSubmit={handleSubmit}>
         <Field
-          name="pseudo"
+          name="surname"
           placeholder="Pseudonyme"
           onChange={changeField}
-          value={pseudo}
+          value={surname}
         />
         <Field
           name="email"
@@ -40,7 +40,7 @@ const InscriptionForm = ({
           value={password}
         />
         <Field
-          name="verif-password"
+          name="verifPassword"
           type="password"
           placeholder="Répétez votre mot de passe"
           onChange={changeField}
@@ -58,7 +58,7 @@ const InscriptionForm = ({
 };
 
 InscriptionForm.propTypes = {
-  pseudo: PropTypes.string.isRequired,
+  surname: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   verifPassword: PropTypes.string.isRequired,
