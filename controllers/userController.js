@@ -8,7 +8,6 @@ const SECRET = "aslkdjlkaj10830912039jlkoaiuwerasdjflkasd";
 // Récupération du model
 const User = require("../models/User");
 
-
 exports.createAccount = async (req, res, next) => {
   const surname = req.body.surname;
   const email = req.body.email;
@@ -61,7 +60,7 @@ exports.login = async (req, res, next) => {
       });
     }
     if (user && valid) {
-      var token2 = jwt.sign({foo: 'bar'}, 'shhh');
+      var token2 = jwt.sign({ foo: "bar" }, "shhh");
       jwt.sign(
         { userId: user.id, surname: user.surname, email: user.email },
         SECRET,
@@ -77,3 +76,44 @@ exports.login = async (req, res, next) => {
     console.log(err.message);
   }
 };
+
+exports.getUserInfos = async (req, res) => {
+  jwt.verify(req.token, SECRET, (err, decoded) => {
+    if (err) {
+      res.status(200).json({
+        success: false,
+        message: "Veuillez vous connecter pour accéder à ce contenu",
+      });
+    } else {
+      User.findByPk(decoded.userId)
+        .then((user) => {
+          res.status(200).json({
+            success: true,
+            surname: user.surname,
+            userId: user.id,
+            email: user.email,
+          });
+        })
+        .catch((err) => {
+          res.status(403).json({
+            success: false,
+            message: "Utilisateur non existant",
+          });
+        });
+    }
+  });
+};
+
+
+exports.verifyToken = (req,res,next) => {
+    const bearerHeader = req.headers['authorization'];
+    if (typeof bearerHeader !== 'undefined') {
+        const bearer = bearerHeader.split(' ');
+        const bearerToken = bearer[1];
+        req.token = bearerToken;
+        next();
+    } else {
+        res.sendStatus(403);
+        return false;
+    }
+}

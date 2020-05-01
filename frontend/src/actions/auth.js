@@ -16,15 +16,13 @@ export const setAuthUser = (
   logged,
   email,
   surname,
-  token,
-  id,
+  userId,
 ) => ({
   type: SET_USER,
   logged,
   email,
   surname,
-  token,
-  id,
+  userId,
 });
 
 export const handleGetUser = (userId) => ({

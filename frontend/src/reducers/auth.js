@@ -9,10 +9,13 @@ const initialState = {
   password: '',
   isLogged: false,
   surname: '',
+  userId: '',
+  token: localStorage.getItem('token') ? localStorage.getItem('token') : '',
 };
 
 // Reducer
 const authReducer = (state = initialState, action = {}) => {
+  console.log(action);
   switch (action.type) {
     case CHANGE_FIELD:
       return {
@@ -23,6 +26,9 @@ const authReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         user: action.user,
+        email: action.email,
+        userId: action.userId,
+        surname: action.surname,
         isLogged: action.logged,
       };
     default:

@@ -19,13 +19,13 @@ const handleError = (error) => {
 const ajaxMiddleware = (store) => (next) => (action) => {
   // Fonction utilisée pour sauvegarder l'utilisateur dans le store via le then
   const saveUser = (response) => {
-    console.log(response.data);
-    console.log(response);
+    console.log(`response ${response.data.email}`);
     let logged = '';
     store.dispatch(setAuthUser(
       logged = true,
       response.data.email,
       response.data.surname,
+      response.data.userId,
     ));
   };
   let token = localStorage.getItem('token');
@@ -33,7 +33,6 @@ const ajaxMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case LOGIN: {
       const state = store.getState();
-
       axios({
         method: 'post',
         url: 'http://localhost:8000/user/login',
@@ -44,11 +43,11 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          console.log(response.data, response);
           token = response.data.token;
           const decryptToken = jwt(token);
           localStorage.setItem('token', token);
           store.dispatch(handleGetUser(decryptToken.userId));
+          store.dispatch(loadLists());
         })
         .catch(handleError);
       break;
@@ -59,14 +58,14 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        url: 'http://165.22.18.208:8001/user/account',
+        url: 'http://localhost:8000/user/account/',
         withCredentials: true,
       })
         .then(saveUser, store.dispatch(loadLists()))
         .catch((err) => {
           console.log(err);
-          window.location.assign('/');
-          localStorage.removeItem('token');
+          // window.location.assign('/');
+          // localStorage.removeItem('token');
         });
       break;
     }
