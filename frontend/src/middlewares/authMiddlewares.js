@@ -22,6 +22,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
   // Fonction utilisée pour sauvegarder l'utilisateur dans le store via le then
   const saveUser = (response) => {
     console.log(`response ${response.data.email}`);
+    // eslint-disable-next-line no-unused-vars
     let logged = '';
     store.dispatch(setAuthUser(
       logged = true,
@@ -93,7 +94,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
     case LOGOUT: {
       axios({
         method: 'post',
-        url: 'http://localhost:3001/logout',
+        url: 'http://localhost:3000/logout',
         withCredentials: true,
       })
         .then(saveUser)

@@ -5,6 +5,7 @@ import App from '../App';
 // == Data / state
 const mapStateToProps = (state) => ({
   loading: state.lists.loading,
+  logged: state.auth.logged,
 });
 
 // == Actions / dispatch

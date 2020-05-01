@@ -7,16 +7,15 @@ import LoginForm from './containers/LoginForm';
 import InscriptionForm from './containers/InscriptionForm';
 import './App.css';
 
-const App = ({ loading, isLogged }) => {
-  return (
+const App = ({ loading, logged }) => (
     <div className="App">
-      {!isLogged && (
+      {!logged && (
         <div className="form-wrap">
           <LoginForm />
           <InscriptionForm />
         </div>
       )}
-      {isLogged && (
+      {logged && (
         <div>
           <Navbar />
           <main>
@@ -67,8 +66,7 @@ const App = ({ loading, isLogged }) => {
         </div>
       )}
     </div>
-  );
-};
+);
 
 App.propTypes = {
   loading: PropTypes.bool.isRequired,

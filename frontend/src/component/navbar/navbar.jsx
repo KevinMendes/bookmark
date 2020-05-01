@@ -27,7 +27,6 @@ Navbar.propTypes = {
 };
 
 Navbar.defaultProps = {
-  isLogged: false,
   loggedMessage: 'Connecté',
 };
 

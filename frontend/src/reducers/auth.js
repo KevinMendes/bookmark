@@ -8,7 +8,7 @@ const initialState = {
   email: '',
   password: '',
   verifPassword: '',
-  isLogged: false,
+  logged: false,
   surname: '',
   userId: '',
   token: localStorage.getItem('token') ? localStorage.getItem('token') : '',
@@ -30,7 +30,7 @@ const authReducer = (state = initialState, action = {}) => {
         email: action.email,
         userId: action.userId,
         surname: action.surname,
-        isLogged: action.logged,
+        logged: action.logged,
       };
     default:
       return state;
