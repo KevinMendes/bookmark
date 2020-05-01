@@ -1,21 +1,33 @@
 // Action Types
-import { SAVE_LISTS } from '../actions/lists';
+import { ADD_IMAGE, ADD_VIDEO, CHANGE_FIELD } from '../actions/lists';
 
 // Initial State
 // state.recipes....
 const initialState = {
-  loading: true,
-  list: [],
+  media: '',
+  tag: '',
+  newTag: '',
+  image: '',
+  video: '',
 };
 
 // Reducer
 const listsReducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case SAVE_LISTS:
+    case CHANGE_FIELD:
       return {
         ...state,
-        list: action.lists,
-        loading: false,
+        [action.name]: action.value,
+      };
+    case ADD_IMAGE:
+      return {
+        ...state,
+        image: action.image,
+      };
+    case ADD_VIDEO:
+      return {
+        ...state,
+        video: action.video,
       };
     default:
       return state;

@@ -1,22 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const Lists = () => {
-  const handleOpenModal = (e) => {
-    e.preventDefault();
-    console.log('Je suis la modal');
-  };
   return (
     <main>
       <div className="title-wrap">
         <h1 className="list-title"> Video </h1>
         <h1 className="list-title"> Image </h1>
       </div>
-      <button type="submit" onClick={handleOpenModal}>
-        {' '}
-        Ajouter
-        {' '}
-      </button>
+      <Link to="/addList">
+        <button type="submit">
+          {' '}
+          Ajouter
+          {' '}
+        </button>
+      </Link>
       <div className="main-wrap">
         <div className="stick">
           <h1 className="title-no_wrap"> Video </h1>

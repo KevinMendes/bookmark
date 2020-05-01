@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import axios from 'axios';
 import jwt from 'jwt-decode';
-import { loadLists } from '../actions/lists';
+import { loadVideos, loadImages } from '../actions/lists';
 import {
   LOGIN,
   LOGOUT,
@@ -19,7 +19,7 @@ const handleError = (error) => {
 };
 
 // Middleware
-const ajaxMiddleware = (store) => (next) => (action) => {
+const authMiddleware = (store) => (next) => (action) => {
   // Fonction utilisée pour sauvegarder l'utilisateur dans le store via le then
   const saveUser = (response) => {
     console.log(`response ${response.data.email}`);
@@ -58,7 +58,8 @@ const ajaxMiddleware = (store) => (next) => (action) => {
           const decryptToken = jwt(token);
           localStorage.setItem('token', token);
           store.dispatch(handleGetUser(decryptToken.userId));
-          store.dispatch(loadLists());
+          store.dispatch(loadImages());
+          store.dispatch(loadVideos());
         })
         .catch(handleError);
       break;
@@ -72,7 +73,11 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         url: 'http://localhost:8000/user/account/',
         withCredentials: true,
       })
-        .then(saveUser, store.dispatch(loadLists()))
+        .then(
+          saveUser,
+          store.dispatch(loadImages()),
+          store.dispatch(loadVideos()),
+        )
         .catch((err) => {
           console.log(err);
           window.location.assign('/');
@@ -116,4 +121,4 @@ const ajaxMiddleware = (store) => (next) => (action) => {
   next(action);
 };
 
-export default ajaxMiddleware;
+export default authMiddleware;

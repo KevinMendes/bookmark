@@ -2,28 +2,22 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const Navbar = ({ handleLogout, loggedMessage }) => (
+const Navbar = ({ handleLogout }) => (
   <header className="App-header">
     <Link to="/">
-      <div className="inscription-form-logged">
-        <p className="inscription-form-message">
-          {loggedMessage}
-        </p>
-        <button
-          type="button"
-          className="inscription-form-button"
-          onClick={handleLogout}
-        >
-          Déconnexion
-        </button>
-      </div>
+      <button
+        type="button"
+        className="inscription-form-button"
+        onClick={handleLogout}
+      >
+        Déconnexion
+      </button>
     </Link>
   </header>
 );
 
 Navbar.propTypes = {
   handleLogout: PropTypes.func.isRequired,
-  loggedMessage: PropTypes.string,
 };
 
 Navbar.defaultProps = {

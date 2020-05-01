@@ -5,15 +5,15 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 // middlewares
 // import ajaxMiddleware from 'src/middlewares/ajaxMiddleware';
 import authMiddleware from '../middlewares/authMiddlewares';
+import listMiddleware from '../middlewares/listMiddleware';
 
 // reducer
 import rootReducer from '../reducers/rootReducer';
 
 const enhancers = composeWithDevTools(
   applyMiddleware(
-    // ajaxMiddleware,
     authMiddleware,
-    // ... middlewares
+    listMiddleware,
   ),
 );
 
