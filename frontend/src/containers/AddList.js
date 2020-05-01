@@ -8,7 +8,7 @@ import { addImage, addVideo, changeField } from '../actions/lists';
 const mapStateToProps = (state) => ({
   newTag: state.lists.newTag,
   media: state.lists.media,
-  tag: state.lists.tag,
+  tag: [123],
 });
 
 // == Actions / dispatch

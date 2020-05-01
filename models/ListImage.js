@@ -11,7 +11,7 @@ const ListImage = sequelize.define("listimage", {
     primaryKey: true,
   },
   lien: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING(500),
     allowNull: false,
   },
   titre: {

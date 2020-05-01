@@ -5,7 +5,7 @@ import { ADD_IMAGE, ADD_VIDEO, CHANGE_FIELD } from '../actions/lists';
 // state.recipes....
 const initialState = {
   media: '',
-  tag: '',
+  tag: '12',
   newTag: '',
   image: '',
   video: '',
