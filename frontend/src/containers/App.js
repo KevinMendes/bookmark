@@ -4,7 +4,7 @@ import App from '../App';
 
 // == Data / state
 const mapStateToProps = (state) => ({
-  loading: state.lists.loading,
+  loading: state.auth.loading,
   logged: state.auth.logged,
 });
 

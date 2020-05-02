@@ -1,13 +1,8 @@
 /* eslint-disable no-console */
 import axios from 'axios';
 import {
-  loadVideos, loadImages, ADD_VIDEO, ADD_IMAGE,
+  LOAD_IMAGES, LOAD_VIDEOS, ADD_VIDEO, ADD_IMAGE,
 } from '../actions/lists';
-
-// Fonction utilisée par les différents catch pour la gestion de l'erreur
-const handleError = (error) => {
-  console.log("Une erreur s'est produite", error);
-};
 
 // Middleware
 const listMiddleware = (store) => (next) => (action) => {
@@ -16,14 +11,37 @@ const listMiddleware = (store) => (next) => (action) => {
   const lien = state.lists.media;
   // En fonction de l'action, je réagis
   switch (action.type) {
+    case LOAD_IMAGES: {
+      axios.post('http://localhost:8000/Image/allImage', {
+        userId: state.auth.userId,
+      })
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      break;
+    }
+    case LOAD_VIDEOS: {
+      axios.post('http://localhost:8000/Video/allVideo', {
+        userId: state.auth.userId,
+      })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      break;
+    }
     case ADD_IMAGE: {
-      console.log('entré middleware');
       axios.get(`http://cors-anywhere.herokuapp.com/https://flickr.com/services/oembed/?format=json&url=${lien}`)
         .then((response) => {
           console.log('here');
           console.log(response);
           axios.post('http://localhost:8000/Image/createImage', {
-            lien: lien,
+            lien,
             titre: response.data.title,
             auteur: response.data.author_name,
             hauteur: response.data.height,
@@ -48,7 +66,7 @@ const listMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response);
           axios.post('http://localhost:8000/Video/createVideo', {
-            lien: lien,
+            lien,
             titre: response.data.title,
             auteur: response.data.author_name,
             hauteur: response.data.height,

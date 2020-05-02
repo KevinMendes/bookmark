@@ -8,6 +8,6 @@ const router = express.Router()
 // création des routes
 router.post('/createImage', imageController.createImage);
 router.post('/destroyImage', imageController.destroyImage);
-router.get('/allImage', imageController.allImage);
+router.post('/allImage', imageController.allImage);
 
 module.exports = router;

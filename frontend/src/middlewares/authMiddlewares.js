@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 import axios from 'axios';
 import jwt from 'jwt-decode';
-import { loadVideos, loadImages } from '../actions/lists';
 import {
   LOGIN,
   LOGOUT,
@@ -22,7 +21,6 @@ const handleError = (error) => {
 const authMiddleware = (store) => (next) => (action) => {
   // Fonction utilisée pour sauvegarder l'utilisateur dans le store via le then
   const saveUser = (response) => {
-    console.log(`response ${response.data.email}`);
     // eslint-disable-next-line no-unused-vars
     let logged = '';
     store.dispatch(setAuthUser(
@@ -58,8 +56,6 @@ const authMiddleware = (store) => (next) => (action) => {
           const decryptToken = jwt(token);
           localStorage.setItem('token', token);
           store.dispatch(handleGetUser(decryptToken.userId));
-          store.dispatch(loadImages());
-          store.dispatch(loadVideos());
         })
         .catch(handleError);
       break;
@@ -75,13 +71,11 @@ const authMiddleware = (store) => (next) => (action) => {
       })
         .then(
           saveUser,
-          store.dispatch(loadImages()),
-          store.dispatch(loadVideos()),
         )
         .catch((err) => {
           console.log(err);
-          window.location.assign('/');
-          localStorage.removeItem('token');
+          // window.location.assign('/');
+          // localStorage.removeItem('token');
         });
       break;
     }

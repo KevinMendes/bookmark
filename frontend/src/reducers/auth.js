@@ -9,6 +9,7 @@ const initialState = {
   password: '',
   verifPassword: '',
   logged: false,
+  loadgin: true,
   surname: '',
   userId: '',
   token: localStorage.getItem('token') ? localStorage.getItem('token') : '',
@@ -31,6 +32,7 @@ const authReducer = (state = initialState, action = {}) => {
         userId: action.userId,
         surname: action.surname,
         logged: action.logged,
+        loading: false,
       };
     default:
       return state;

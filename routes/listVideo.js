@@ -8,6 +8,6 @@ const router = express.Router();
 // création des routes
 router.post('/createVideo', videoController.createVideo);
 router.post('/destroyVideo', videoController.destroyVideo);
-router.get('/allVideo', videoController.allVideo);
+router.post('/allVideo', videoController.allVideo);
 
 module.exports = router;

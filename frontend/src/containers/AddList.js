@@ -8,6 +8,7 @@ import { addImage, addVideo, changeField } from '../actions/lists';
 const mapStateToProps = (state) => ({
   newTag: state.lists.newTag,
   media: state.lists.media,
+  userId: state.auth.userId,
   tag: [123],
 });
 

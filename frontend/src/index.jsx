@@ -9,7 +9,6 @@ import { checkLogged } from './actions/auth';
 import * as serviceWorker from './serviceWorker';
 
 store.dispatch(checkLogged());
-
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

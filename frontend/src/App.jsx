@@ -13,7 +13,7 @@ import Lists from './containers/Lists';
 import AddList from './containers/AddList';
 import './App.css';
 
-const App = ({ logged }) => (
+const App = ({ logged, loading }) => (
   <div className="App">
     {!logged && (
       <div className="form-wrap">
@@ -28,9 +28,16 @@ const App = ({ logged }) => (
           <Route path="/addList">
             <AddList />
           </Route>
+          {loading && (
+            <div className="loading">
+              Chargement, veuillez patienter...
+            </div>
+          )}
+          {!loading && (
           <Route path="/">
             <Lists />
           </Route>
+          )}
         </Switch>
       </div>
     )}
