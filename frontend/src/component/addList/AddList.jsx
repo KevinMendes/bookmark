@@ -9,7 +9,7 @@ const AddList = ({
     evt.preventDefault();
     if (media.indexOf('flickr') !== -1) {
       handleAddImage();
-    } else if (media.indexOf('viameo') !== -1) {
+    } else if (media.indexOf('vimeo') !== -1) {
       handleAddVideo();
     } else {
       const form = document.querySelector('form.addList-form-element');

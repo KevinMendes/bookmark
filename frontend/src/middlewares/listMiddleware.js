@@ -18,13 +18,7 @@ const listMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case ADD_IMAGE: {
       console.log('entré middleware');
-      axios.get(`http://cors-anywhere.herokuapp.com/https://flickr.com/services/oembed/?format=json&url=${lien}`,
-        {
-          headers: {
-            'Content-Type': 'application/octet-stream',
-            'Access-Control-Allow-Origin': false,
-          },
-        })
+      axios.get(`http://cors-anywhere.herokuapp.com/https://flickr.com/services/oembed/?format=json&url=${lien}`)
         .then((response) => {
           console.log('here');
           console.log(response);
@@ -50,15 +44,19 @@ const listMiddleware = (store) => (next) => (action) => {
     }
     case ADD_VIDEO: {
       console.log('entré middleware');
-      axios.get(`http://cors-anywhere.herokuapp.com/https://flickr.com/services/oembed/?format=json&url=${lien}`,
-        {
-          headers: {
-            'Content-Type': 'application/octet-stream',
-            'Access-Control-Allow-Origin': false,
-          },
-        })
+      axios.get(`https://vimeo.com/api/oembed.json?url=${lien}`)
         .then((response) => {
           console.log(response);
+          axios.post('http://localhost:8000/Video/createVideo', {
+            lien: lien,
+            titre: response.data.title,
+            auteur: response.data.author_name,
+            hauteur: response.data.height,
+            largeur: response.data.width,
+            duree: response.data.duration,
+            userId: state.auth.userId,
+            tagId: state.lists.tag,
+          });
         })
         .catch((err) => {
           console.log(err);
