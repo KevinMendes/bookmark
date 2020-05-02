@@ -69,9 +69,7 @@ const authMiddleware = (store) => (next) => (action) => {
         url: 'http://localhost:8000/user/account/',
         withCredentials: true,
       })
-        .then(
-          saveUser,
-        )
+        .then(saveUser)
         .catch((err) => {
           console.log(err);
           // window.location.assign('/');

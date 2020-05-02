@@ -1,12 +1,23 @@
 /* eslint-disable no-console */
 import axios from 'axios';
 import {
-  LOAD_IMAGES, LOAD_VIDEOS, ADD_VIDEO, ADD_IMAGE,
+  LOAD_IMAGES, LOAD_VIDEOS, ADD_VIDEO, ADD_IMAGE, setImages, setVideos,
 } from '../actions/lists';
 
 // Middleware
 const listMiddleware = (store) => (next) => (action) => {
-  // Fonction utilisée pour sauvegarder l'utilisateur dans le store via le then
+  // Fonctions utilisées pour sauvegarder les stores dans le store via le then
+  const saveVideos = (response) => {
+    console.log(response);
+    store.dispatch(setVideos(
+      response.data.result,
+    ));
+  };
+  const saveImages = (response) => {
+    store.dispatch(setImages(
+      response.data.result,
+    ));
+  };
   const state = store.getState();
   const lien = state.lists.media;
   // En fonction de l'action, je réagis
@@ -15,9 +26,7 @@ const listMiddleware = (store) => (next) => (action) => {
       axios.post('http://localhost:8000/Image/allImage', {
         userId: state.auth.userId,
       })
-        .then((response) => {
-          console.log(response.data);
-        })
+        .then(saveImages)
         .catch((err) => {
           console.log(err);
         });
@@ -27,9 +36,7 @@ const listMiddleware = (store) => (next) => (action) => {
       axios.post('http://localhost:8000/Video/allVideo', {
         userId: state.auth.userId,
       })
-        .then((response) => {
-          console.log(response);
-        })
+        .then(saveVideos)
         .catch((err) => {
           console.log(err);
         });

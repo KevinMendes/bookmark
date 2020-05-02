@@ -1,5 +1,7 @@
 // Action Types
-import { ADD_IMAGE, ADD_VIDEO, CHANGE_FIELD } from '../actions/lists';
+import {
+  ADD_IMAGE, ADD_VIDEO, CHANGE_FIELD, SET_VIDEOS, SET_IMAGES,
+} from '../actions/lists';
 
 // Initial State
 // state.recipes....
@@ -7,8 +9,8 @@ const initialState = {
   media: '',
   tag: '12',
   newTag: '',
-  image: '',
-  video: '',
+  image: [],
+  video: [],
 };
 
 // Reducer
@@ -18,6 +20,16 @@ const listsReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         [action.name]: action.value,
+      };
+    case SET_VIDEOS:
+      return {
+        ...state,
+        video: action.videos,
+      };
+    case SET_IMAGES:
+      return {
+        ...state,
+        image: action.images,
       };
     case ADD_IMAGE:
       return {
