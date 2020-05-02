@@ -5,15 +5,17 @@ import PropTypes from 'prop-types';
 import {
   Switch,
   Route,
-} from "react-router-dom";
-import Navbar from './component/navbar/navbar';
+} from 'react-router-dom';
+import Navbar from './containers/NavBar';
 import LoginForm from './containers/LoginForm';
 import InscriptionForm from './containers/InscriptionForm';
 import Lists from './containers/Lists';
 import AddList from './containers/AddList';
 import './App.css';
 
-const App = ({ logged, loading }) => (
+const App = ({
+  logged, loading, store, handleLoadVideos, handleLoadImages,
+}) => (
   <div className="App">
     {!logged && (
       <div className="form-wrap">
@@ -34,16 +36,17 @@ const App = ({ logged, loading }) => (
             </div>
           )}
           {!loading && (
-          <Route path="/">
-            <Lists />
-          </Route>
+            handleLoadVideos(),
+            handleLoadImages(),
+              <Route path="/">
+                <Lists />
+              </Route>
           )}
         </Switch>
       </div>
     )}
   </div>
 );
-
 App.propTypes = {
   logged: PropTypes.bool.isRequired,
 };

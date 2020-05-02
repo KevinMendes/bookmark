@@ -8,7 +8,6 @@ import {
 const listMiddleware = (store) => (next) => (action) => {
   // Fonctions utilisées pour sauvegarder les stores dans le store via le then
   const saveVideos = (response) => {
-    console.log(response);
     store.dispatch(setVideos(
       response.data.result,
     ));
