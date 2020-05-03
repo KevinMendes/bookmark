@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import App from '../App';
 import { loadVideos, loadImages } from '../actions/lists';

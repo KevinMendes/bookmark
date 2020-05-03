@@ -2,7 +2,7 @@ p {
   margin: 3px;
 }
 .form-wrap {
-  display:flex;
+  display: flex;
   justify-content: space-around;
   margin: 25vh 0;
 }
@@ -39,7 +39,9 @@ button {
   color: #61dafb;
 }
 .pagination {
-  text-align: center;
+  margin: 0 25vh;
+  text-align:center;
+  padding: 1vh;
 }
 @media (min-width: 769px) {
   p {

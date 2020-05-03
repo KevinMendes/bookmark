@@ -28,7 +28,7 @@ const Card = ({
         Tag(s) :
         {' '}
         {tags.map((tag) => (
-          <span key={`${createdAt}${titre}`} className="tag">
+          <span key={`${createdAt}${titre}${tag.id}`} className="tag">
             {tag.tag}
             {' '}
           </span>
