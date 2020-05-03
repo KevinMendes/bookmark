@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-
+import { deleteImage, deleteVideo } from '../actions/lists';
 import Card from '../component/Card/Card';
 
 // == Data / state
@@ -8,7 +8,14 @@ const mapStateToProps = (state) => ({
 });
 
 // == Actions / dispatch
-const mapDispatchToProps = {};
+const mapDispatchToProps = (dispatch) => ({
+  deleteVideo: (id) => {
+    dispatch(deleteVideo(id));
+  },
+  deleteImage: (id) => {
+    dispatch(deleteImage(id));
+  },
+});
 
 
 // création du lien : container

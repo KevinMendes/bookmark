@@ -68,6 +68,7 @@ exports.allVideo = (req, res, next) => {
       userId: userId,
     },
     attributes: [
+      "id",
       "lien",
       "titre",
       "auteur",

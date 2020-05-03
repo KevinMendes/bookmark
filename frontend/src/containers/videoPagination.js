@@ -8,7 +8,7 @@ const mapStateToProps = (state) => ({
 });
 
 // == Actions / dispatch
-const mapDispatchToProps = {};
+const mapDispatchToProps = ({});
 
 
 // création du lien : container

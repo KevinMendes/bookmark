@@ -6,6 +6,8 @@ export const ADD_IMAGE = 'ADD_IMAGE';
 export const LOAD_IMAGES = 'LOAD_IMAGES';
 export const SET_IMAGES = 'SET_IMAGES';
 export const SET_VIDEOS = 'SET_VIDEOS';
+export const DELETE_VIDEO = 'DELETE_VIDEO';
+export const DELETE_IMAGE = 'DELETE_IMAGE';
 
 // Creators
 export const setVideos = (videos) => ({
@@ -40,3 +42,12 @@ export const loadImages = () => ({
   type: LOAD_IMAGES,
 });
 
+export const deleteVideo = (id) => ({
+  type: DELETE_VIDEO,
+  id,
+});
+
+export const deleteImage = (id) => ({
+  type: DELETE_IMAGE,
+  id,
+});

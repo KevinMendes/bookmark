@@ -17,7 +17,7 @@ const VideoPagination = ({ videos }) => {
     <div className="stick">
       <h1 className="title-no_wrap"> Video </h1>
       {currentVideos.map((video) => (
-        <Card key={video.id} {...video} />
+        <Card key={video.id} posts={video} />
       ))}
       <Pagination postsPerPage={videoPerPage} totalPosts={videos.length} paginate={paginate} />
     </div>
@@ -26,7 +26,8 @@ const VideoPagination = ({ videos }) => {
 
 VideoPagination.propTypes = {
   videos: PropTypes.arrayOf(PropTypes.number, PropTypes.string).isRequired,
-  setCurrentVideoPage: PropTypes.number.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  setCurrentVideoPage: PropTypes.number,
 };
 
 export default VideoPagination;

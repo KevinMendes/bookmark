@@ -17,7 +17,7 @@ const ImagePagination = ({ images }) => {
     <div className="stick">
       <h1 className="title-no_wrap"> Image </h1>
       {currentImages.map((image) => (
-        <Card key={image.id} {...image} />
+        <Card key={image.id} posts={image} />
       ))}
       <Pagination postsPerPage={imagePerPage} totalPosts={images.length} paginate={paginate} />
     </div>
@@ -26,7 +26,8 @@ const ImagePagination = ({ images }) => {
 
 ImagePagination.propTypes = {
   images: PropTypes.arrayOf(PropTypes.number, PropTypes.string).isRequired,
-  setCurrentImagePage: PropTypes.number.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  setCurrentImagePage: PropTypes.number,
 };
 
 export default ImagePagination;

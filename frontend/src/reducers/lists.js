@@ -1,6 +1,12 @@
 // Action Types
 import {
-  ADD_IMAGE, ADD_VIDEO, CHANGE_FIELD, SET_VIDEOS, SET_IMAGES,
+  ADD_IMAGE,
+  ADD_VIDEO,
+  CHANGE_FIELD,
+  SET_VIDEOS,
+  SET_IMAGES,
+  DELETE_IMAGE,
+  DELETE_VIDEO,
 } from '../actions/lists';
 
 // Initial State
@@ -40,6 +46,16 @@ const listsReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         video: action.video,
+      };
+    case DELETE_VIDEO:
+      return {
+        ...state,
+        id: action.id,
+      };
+    case DELETE_IMAGE:
+      return {
+        ...state,
+        id: action.id,
       };
     default:
       return state;
