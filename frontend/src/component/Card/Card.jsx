@@ -24,17 +24,15 @@ const Card = ({
       </p>
       <p>
         {' '}
-        <p>
-          {' '}
-          Tag(s) :
-          {' '}
-          {tags.map((tag) => (
-            <span key={`${createdAt}${titre}`} className="tag">
-              {tag.tag}
-              {' '}
-            </span>
-          ))}
-        </p>
+        {' '}
+        Tag(s) :
+        {' '}
+        {tags.map((tag) => (
+          <span key={`${createdAt}${titre}`} className="tag">
+            {tag.tag}
+            {' '}
+          </span>
+        ))}
       </p>
       {duree
         ? (

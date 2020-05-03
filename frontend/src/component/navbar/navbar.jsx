@@ -3,14 +3,16 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const Navbar = ({ handleLogout }) => {
-  handleLogout();
+  const handleClick = () => {
+    handleLogout();
+  };
   return (
     <header className="App-header">
       <Link to="/">
         <button
           type="button"
           className="inscription-form-button"
-          onClick={handleLogout}
+          onClick={handleClick}
         >
           Déconnexion
         </button>

@@ -97,13 +97,9 @@ const authMiddleware = (store) => (next) => (action) => {
     }
 
     case LOGOUT: {
-      axios({
-        method: 'post',
-        url: 'http://localhost:3000/logout',
-        withCredentials: true,
-      })
-        .then(saveUser)
-        .catch(handleError);
+      window.location.assign('/');
+      localStorage.removeItem('token');
+      localStorage.removeItem('loglevel:webpack-dev-server');
       break;
     }
     default:
