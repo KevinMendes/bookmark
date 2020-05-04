@@ -11,6 +11,8 @@ export const DELETE_IMAGE = 'DELETE_IMAGE';
 export const SET_OLD_MEDIA = 'SET_OLD_MEDIA';
 export const MODIF_IMAGE = 'MODIF_IMAGE';
 export const MODIF_VIDEO = 'MODIF_VIDEO';
+export const ADD_TAG = 'ADD_TAG';
+export const SET_TAG = 'SET_TAG';
 
 // Creators
 export const setOldMedia = (posts) => ({
@@ -26,6 +28,11 @@ export const setVideos = (videos) => ({
 export const setImages = (images) => ({
   type: SET_IMAGES,
   images,
+});
+
+export const setTag = (tag) => ({
+  type: SET_TAG,
+  tag,
 });
 
 export const changeField = (value, name) => ({
@@ -52,6 +59,10 @@ export const loadVideos = () => ({
 
 export const addImage = () => ({
   type: ADD_IMAGE,
+});
+
+export const addTag = () => ({
+  type: ADD_TAG,
 });
 
 export const loadImages = () => ({

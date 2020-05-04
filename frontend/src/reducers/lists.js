@@ -10,13 +10,15 @@ import {
   SET_OLD_MEDIA,
   MODIF_VIDEO,
   MODIF_IMAGE,
+  ADD_TAG,
+  SET_TAG,
 } from '../actions/lists';
 
 // Initial State
 // state.recipes....
 const initialState = {
   media: '',
-  tag: '12',
+  tag: '',
   newTag: '',
   image: [],
   video: [],
@@ -25,7 +27,7 @@ const initialState = {
 
 // Reducer
 const listsReducer = (state = initialState, action = {}) => {
-      console.log(action);
+  console.log(action);
   switch (action.type) {
     case SET_OLD_MEDIA:
       return {
@@ -47,6 +49,11 @@ const listsReducer = (state = initialState, action = {}) => {
         ...state,
         image: action.images,
       };
+    case SET_TAG:
+      return {
+        ...state,
+        tag: action.tag,
+      };
     case ADD_IMAGE:
       return {
         ...state,
@@ -56,6 +63,11 @@ const listsReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         video: action.video,
+      };
+    case ADD_TAG:
+      return {
+        ...state,
+        newTag: action.newTag,
       };
     case MODIF_VIDEO:
       return {

@@ -9,28 +9,13 @@ const SECRET = "aslkdjlkaj10830912039jlkoaiuwerasdjflkasd";
 const jwt = require("jsonwebtoken");
 
 exports.createImage = (req, res, next) => {
-  console.log(req.body);
   const lien = req.body.lien;
   const titre = req.body.titre;
   const auteur = req.body.auteur;
   const hauteur = req.body.hauteur;
   const largeur = req.body.largeur;
-  const tagId = Array.from(req.body.tagId);
+  const tagId = req.body.tagId;
   const userId = req.body.userId;
-  console.log(tagId);
-  // Middleware servant à vérifier la présence du token
-  // avant chaque action sur la BDD autre que la connexion
-  // jwt.verify = (req, res, next) => {
-  //   try {
-  //     let decoded = jwt.verify(token, SECRET, {
-  //       algorithme: ["HS256"],
-  //     });
-  //     console.log(decoded);
-  //   } catch (err) {
-  //     console.log(err, err.message);
-  //     return false;
-  //   }
-  // création de l'entrée dans la table listimage
   Image.create({
     lien: lien,
     titre: titre,
@@ -40,12 +25,12 @@ exports.createImage = (req, res, next) => {
     userId: userId,
   })
     .then((result) => {
-      const interTable = tagId.map((id) =>
-        TagImage.create({
-          tagId: id,
-          listimageId: result.id,
-        })
-      );
+      console.log(result);
+      console.log(tagId);
+      TagImage.create({
+        tagId: tagId,
+        listimageId: result.id,
+      });
     })
     .then(() => {
       res.status(202).json({
@@ -109,16 +94,18 @@ exports.modifImage = (req, res, next) => {
   const hauteur = req.body.hauteur;
   const largeur = req.body.largeur;
   const mediaId = req.body.mediaId;
-  Image.update({
-    lien: lien,
-    titre: titre,
-    auteur: auteur,
-    hauteur: hauteur,
-    largeur: largeur,
-  },
-  {
+  Image.update(
+    {
+      lien: lien,
+      titre: titre,
+      auteur: auteur,
+      hauteur: hauteur,
+      largeur: largeur,
+    },
+    {
       where: { id: mediaId },
-  })
+    }
+  )
     .then((image) => {
       res.status(202).json({
         message: "updated",

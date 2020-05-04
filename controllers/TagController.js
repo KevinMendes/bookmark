@@ -5,28 +5,47 @@ const User = require("../models/User");
 const Tag = require("../models/Tag");
 const ListVideo = require("../models/ListVideo");
 const ListImage = require("../models/ListImage");
+const TagImage = require("../models/TagListImage");
+const TagVideo = require("../models/TagListVideo");
 // import de la librairie de tocket et du SECRET
 const SECRET = "aslkdjlkaj10830912039jlkoaiuwerasdjflkasd";
 const jwt = require("jsonwebtoken");
 
-exports.createTag = (req, res, next) => {
+exports.createTagVideo = (req, res, next) => {
   const tag = req.body.tag;
-  // Middleware servant à vérifier la présence du token
-  // avant chaque action sur la BDD autre que la connexion
-  // jwt.verify = (req, res, next) => {
-  //   try {
-  //     let decoded = jwt.verify(token, SECRET, {
-  //       algorithme: ["HS256"],
-  //     });
-  //     console.log(decoded);
-  //   } catch (err) {
-  //     console.log(err, err.message);
-  //     return false;
-  //   }
-  // création de la ligne
+  const listVideoId = req.body.mediaId;
   Tag.create({
     tag: tag,
   })
+    .then((result) => {
+      TagVideo.create({
+        tagId: result.id,
+        listimageId: listVideoId,
+      });
+    })
+    .then((result) => {
+      res.status(201).json({
+        result,
+        success: true,
+      });
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
+exports.createTagImage = (req, res, next) => {
+  const tag = req.body.tag;
+  const listImageId = req.body.mediaId;
+  Tag.create({
+    tag: tag,
+  })
+    .then((result) => {
+      TagImage.create({
+        tagId: result.id,
+        listimageId: listImageId,
+      });
+    })
     .then((result) => {
       res.status(201).json({
         result,
@@ -56,18 +75,20 @@ exports.allTag = (req, res, next) => {
   userId = req.body.userId;
   Tag.findAll({
     attributes: ["tag", "id"],
-    [Op.and]: [{
-      include: [
-        ({
-          model: ListVideo,
-          where: { userId: userId },
-        },
-        {
-          model: ListImage,
-          where: { userId: userId },
-        })
-      ],
-    }],
+    [Op.and]: [
+      {
+        include: [
+          ({
+            model: ListVideo,
+            where: { userId: userId },
+          },
+          {
+            model: ListImage,
+            where: { userId: userId },
+          }),
+        ],
+      },
+    ],
   })
     .then((result) => {
       res.status(202).json({

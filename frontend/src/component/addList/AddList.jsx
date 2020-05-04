@@ -1,21 +1,34 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Field from './field/index';
 
+
 const AddList = ({
-  media, newTag, changeField, handleAddVideo, handleAddImage,
+  media, newTag, changeField, handleAddVideo, handleAddImage, addTag,
 }) => {
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-    if (media.indexOf('flickr') !== -1) {
-      handleAddImage();
-    } else if (media.indexOf('vimeo') !== -1) {
-      handleAddVideo();
+  const handleSubmit = () => {
+    if (media.length > 0 && newTag.length > 0) {
+      if (media.indexOf('flickr') !== -1) {
+        handleAddImage();
+      } else if (media.indexOf('vimeo') !== -1) {
+        handleAddVideo();
+      } else {
+        const form = document.querySelector('h1.h1mark');
+        const alertMessage = document.createElement('p');
+        alertMessage.id = 'alertMessage';
+        alertMessage.innerText = "Votre lien n'est pas un lien flickr ou viameo";
+        if (document.getElementById('alertMessage')) {
+          document.getElementById('alertMessage').remove();
+        }
+        form.appendChild(alertMessage);
+      }
+      addTag();
     } else {
-      const form = document.querySelector('form.addList-form-element');
+      const form = document.querySelector('h1.h1mark');
       const alertMessage = document.createElement('p');
       alertMessage.id = 'alertMessage';
-      alertMessage.innerText = "Votre lien n'est pas valide";
+      alertMessage.innerText = 'Veuillez ajouter un lien et ajouter un tag';
       if (document.getElementById('alertMessage')) {
         document.getElementById('alertMessage').remove();
       }
@@ -25,7 +38,7 @@ const AddList = ({
 
   return (
     <div className="addList-form">
-      <h1> Ajouter un lien et un tag </h1>
+      <h1 className="h1mark"> Ajouter un lien et un tag </h1>
       <form
         autoComplete="off"
         className="addList-form-element"
@@ -39,15 +52,17 @@ const AddList = ({
           value={media}
         />
         <Field
-          name="tag"
+          name="newTag"
           type="text"
-          placeholder="Ajouter un tag"
+          placeholder="Ajouter un tag, séparer par une ',' pour en ajouter plusieurs"
           onChange={changeField}
           value={newTag}
         />
-        <button type="submit" className="login-form-button">
-          OK
-        </button>
+        <Link to="/" onClick={handleSubmit}>
+          <button type="submit" className="login-form-button">
+            OK
+          </button>
+        </Link>
       </form>
     </div>
   );
@@ -59,6 +74,7 @@ AddList.propTypes = {
   changeField: PropTypes.func.isRequired,
   handleAddVideo: PropTypes.func.isRequired,
   handleAddImage: PropTypes.func.isRequired,
+  addTag: PropTypes.func.isRequired,
 };
 
 export default AddList;

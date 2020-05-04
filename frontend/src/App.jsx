@@ -53,6 +53,9 @@ const App = ({
 );
 App.propTypes = {
   logged: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
+  handleLoadVideos: PropTypes.func.isRequired,
+  handleLoadImages: PropTypes.func.isRequired,
 };
 
 export default App;

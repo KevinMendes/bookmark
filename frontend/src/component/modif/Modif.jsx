@@ -1,7 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Field from './field/index';
+import './modif.css';
 
 const Modif = (
   {
@@ -10,10 +12,11 @@ const Modif = (
     modifVideo,
     modifImage,
     oldMedia,
+    newTag,
+    addTag,
   },
 ) => {
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
+  const handleSubmit = () => {
     if (media.indexOf('flickr') !== -1) {
       modifImage();
     } else if (media.indexOf('vimeo') !== -1) {
@@ -29,27 +32,56 @@ const Modif = (
       form.append(alertMessage);
     }
   };
+  const handleAddTag = () => {
+    addTag();
+  };
   return (
-    <div>
-      <p>{oldMedia.titre}</p>
+    <div className="wrap">
+      <div className="modify-link">
+        <p>
+          Titre du lien :
+          {' '}
+          {oldMedia.titre}
+        </p>
 
-      <p className="alter"> Insérer un nouveau lien pour modifier l'entrée :</p>
-      <form
-        autoComplete="off"
-        className="addList-form-element"
-        onSubmit={handleSubmit}
-      >
+        <p className="alter"> Insérer un nouveau lien pour modifier l'entrée :</p>
+        <form
+          autoComplete="off"
+          className="addList-form-element"
+          onSubmit={handleSubmit}
+        >
+          <Field
+            name="media"
+            placeholder="Lien du média"
+            type="text"
+            onChange={changeField}
+            value={media}
+          />
+          <Link to="/" onClick={handleSubmit}>
+            <button type="submit" className="login-form-button">
+              OK
+            </button>
+          </Link>
+        </form>
+      </div>
+      <div className="add-tag">
+        <h1>Ajouter un tag à ce média</h1>
         <Field
-          name="media"
-          placeholder="Lien du média"
+          name="newTag"
+          placeholder="NouveauTag"
           type="text"
           onChange={changeField}
-          value={media}
+          value={newTag}
         />
-        <button type="submit" className="login-form-button">
-          OK
-        </button>
-      </form>
+        <Link to="/" onClick={handleAddTag}>
+          <button type="submit" className="login-form-button">
+            OK
+          </button>
+        </Link>
+      </div>
+      <div className="delete-tag">
+        <h1>Supprimer un tag lié à ce média</h1>
+      </div>
     </div>
   );
 };
@@ -60,5 +92,7 @@ Modif.propTypes = {
   oldMedia: PropTypes.objectOf(PropTypes.number, PropTypes.string).isRequired,
   media: PropTypes.string.isRequired,
   modifImage: PropTypes.func.isRequired,
+  newTag: PropTypes.string.isRequired,
+  addTag: PropTypes.func.isRequired,
 };
 export default Modif;

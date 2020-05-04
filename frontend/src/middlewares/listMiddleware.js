@@ -17,6 +17,7 @@ import {
 
 // Middleware
 const listMiddleware = (store) => (next) => (action) => {
+  let id = '';
   // Fonctions utilisées pour sauvegarder les stores dans le store via le then
   const saveVideos = (response) => {
     store.dispatch(setVideos(response.data.result));
@@ -94,23 +95,26 @@ const listMiddleware = (store) => (next) => (action) => {
       break;
     }
     case ADD_IMAGE: {
-      axios
-        .get(
-          `http://cors-anywhere.herokuapp.com/https://flickr.com/services/oembed/?format=json&url=${lien}`,
-        )
+      axios.post('http://localhost:8000/Tag/createTag', {
+        tag: state.lists.newTag,
+      })
         .then((response) => {
-          axios.post('http://localhost:8000/Image/createImage', {
-            lien,
-            titre: response.data.title,
-            auteur: response.data.author_name,
-            hauteur: response.data.height,
-            largeur: response.data.width,
-            userId: state.auth.userId,
-            tagId: state.lists.tag,
-          });
-        })
-        .then((response) => {
-          console.log(response);
+          id = response.data.result.id;
+          console.log(id);
+        }).then(() => {
+          console.log(id);
+          axios
+            .get(`http://cors-anywhere.herokuapp.com/https://flickr.com/services/oembed/?format=json&url=${lien}`).then((response) => {
+              axios.post('http://localhost:8000/Image/createImage', {
+                lien,
+                titre: response.data.title,
+                auteur: response.data.author_name,
+                hauteur: response.data.height,
+                largeur: response.data.width,
+                userId: state.auth.userId,
+                tagId: id,
+              });
+            });
         })
         .catch((err) => {
           console.log(err);
@@ -160,7 +164,7 @@ const listMiddleware = (store) => (next) => (action) => {
     }
     case DELETE_IMAGE: {
       axios
-        .post('http://localhost:8000/image/destroyVideo', {
+        .post('http://localhost:8000/Image/destroyImage', {
           id: action.id,
         })
         .then(() => {

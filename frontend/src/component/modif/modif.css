@@ -1,0 +1,17 @@
+h1 {
+    font-size: 1.4em;
+}
+
+.wrap {
+    display: flex;
+}
+
+.modify-link {
+    width: 32vw;
+}
+.add-tag {
+    width: 32vw;
+}
+.delete-tag {
+    width: 32vw;
+}

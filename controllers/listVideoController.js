@@ -16,9 +16,8 @@ exports.createVideo = (req, res, next) => {
   const hauteur = req.body.hauteur;
   const largeur = req.body.largeur;
   const duree = req.body.duree;
-  const tagId = Array.from(req.body.tagId);
+  const tagId = req.body.tagId;
   const userId = req.body.userId;
-  console.log(tagId);
   // création de l'entrée dans la table listvideo
   Video.create({
     lien: lien,
@@ -30,12 +29,10 @@ exports.createVideo = (req, res, next) => {
     userId: userId,
   })
     .then((result) => {
-      const interTable = tagId.map((id) =>
-        TagVideo.create({
-          tagId: id,
-          listvideoId: result.id,
-        })
-      );
+      TagVideo.create({
+        tagId: id,
+        listvideoId: result.id,
+      });
     })
     .then(() => {
       res.status(202).json({
@@ -100,14 +97,20 @@ exports.modifVideo = (req, res, next) => {
   const hauteur = req.body.hauteur;
   const largeur = req.body.largeur;
   const duree = req.body.duree;
-  Image.update({
-    lien: lien,
-    titre: titre,
-    auteur: auteur,
-    hauteur: hauteur,
-    largeur: largeur,
-    duree: duree,
-  })
+  const mediaId = req.body.mediaId;
+  Image.update(
+    {
+      lien: lien,
+      titre: titre,
+      auteur: auteur,
+      hauteur: hauteur,
+      largeur: largeur,
+      duree: duree,
+    },
+    {
+      where: { id: mediaId },
+    }
+  )
     .then((video) => {
       res.status(202).json({
         message: "updated",
