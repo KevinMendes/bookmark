@@ -1,21 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
 const Card = ({
   posts,
-  // lien,
-  // titre,
-  // duree,
-  // hauteur,
-  // largeur,
-  // tags,
-  // auteur,
-  // createdAt,
-  // id,
   deleteVideo,
   deleteImage,
+  setOldMedia,
 }) => {
   if (posts.lien.length > 100) {
     // eslint-disable-next-line no-param-reassign
@@ -23,6 +15,9 @@ const Card = ({
   }
   // eslint-disable-next-line no-param-reassign
   const createdAt = posts.createdAt.slice(0, 10);
+  const handleSetOldMedia = () => {
+    setOldMedia(posts);
+  };
   const deleteMedia = (e) => {
     const mediaId = e.currentTarget.value.substring(6);
     if (posts.duree) {
@@ -31,13 +26,6 @@ const Card = ({
       deleteImage(mediaId);
     }
   };
-  const handleChange = () => {
-    console.log(posts);
-    return (
-      <Redirect to="/modif" currentPost={posts} />
-    );
-  };
-
   return (
     <div className="list-wrap" id={`media${posts.id}`}>
       <a className="App-link" href={posts.lien}>
@@ -103,7 +91,9 @@ const Card = ({
         </div>
       )}
       <div className="bottom-button">
-        <Button variant="primary" onClick={handleChange}> modifier </Button>
+        <Link to="/modif" onClick={handleSetOldMedia}>
+          <Button variant="primary"> modifier </Button>
+        </Link>
         <Button variant="danger" value={`button${posts.id}`} onClick={deleteMedia}>
           {' '}
           Supprimer
@@ -115,18 +105,10 @@ const Card = ({
 };
 
 Card.propTypes = {
-  tags: PropTypes.arrayOf(PropTypes.string, PropTypes.number).isRequired,
-  lien: PropTypes.string.isRequired,
-  titre: PropTypes.string.isRequired,
-  duree: PropTypes.number.isRequired,
-  auteur: PropTypes.string.isRequired,
-  createdAt: PropTypes.string.isRequired,
-  hauteur: PropTypes.number.isRequired,
-  largeur: PropTypes.number.isRequired,
-  id: PropTypes.number.isRequired,
   deleteVideo: PropTypes.func.isRequired,
   deleteImage: PropTypes.func.isRequired,
-  posts: PropTypes.arrayOf(PropTypes.number, PropTypes.string).isRequired,
+  posts: PropTypes.objectOf(PropTypes.number, PropTypes.string).isRequired,
+  setOldMedia: PropTypes.func.isRequired,
 };
 
 export default Card;

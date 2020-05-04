@@ -9,5 +9,6 @@ const router = express.Router()
 router.post('/createImage', imageController.createImage);
 router.post('/destroyImage', imageController.destroyImage);
 router.post('/allImage', imageController.allImage);
+router.post('/modifImage', imageController.modifImage);
 
 module.exports = router;

@@ -7,6 +7,9 @@ import {
   SET_IMAGES,
   DELETE_IMAGE,
   DELETE_VIDEO,
+  SET_OLD_MEDIA,
+  MODIF_VIDEO,
+  MODIF_IMAGE,
 } from '../actions/lists';
 
 // Initial State
@@ -17,11 +20,18 @@ const initialState = {
   newTag: '',
   image: [],
   video: [],
+  oldMedia: '',
 };
 
 // Reducer
 const listsReducer = (state = initialState, action = {}) => {
+      console.log(action);
   switch (action.type) {
+    case SET_OLD_MEDIA:
+      return {
+        ...state,
+        oldMedia: action.posts,
+      };
     case CHANGE_FIELD:
       return {
         ...state,
@@ -46,6 +56,16 @@ const listsReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         video: action.video,
+      };
+    case MODIF_VIDEO:
+      return {
+        ...state,
+        video: action.video,
+      };
+    case MODIF_IMAGE:
+      return {
+        ...state,
+        image: action.image,
       };
     case DELETE_VIDEO:
       return {

@@ -101,3 +101,31 @@ exports.allImage = (req, res, next) => {
       console.log(err.message);
     });
 };
+
+exports.modifImage = (req, res, next) => {
+  const lien = req.body.lien;
+  const titre = req.body.titre;
+  const auteur = req.body.auteur;
+  const hauteur = req.body.hauteur;
+  const largeur = req.body.largeur;
+  const mediaId = req.body.mediaId;
+  Image.update({
+    lien: lien,
+    titre: titre,
+    auteur: auteur,
+    hauteur: hauteur,
+    largeur: largeur,
+  },
+  {
+      where: { id: mediaId },
+  })
+    .then((image) => {
+      res.status(202).json({
+        message: "updated",
+        image,
+      });
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};

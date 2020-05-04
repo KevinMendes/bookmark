@@ -11,6 +11,8 @@ import {
   DELETE_IMAGE,
   loadVideos,
   loadImages,
+  MODIF_IMAGE,
+  MODIF_VIDEO,
 } from '../actions/lists';
 
 // Middleware
@@ -48,14 +50,55 @@ const listMiddleware = (store) => (next) => (action) => {
         });
       break;
     }
+    case MODIF_IMAGE: {
+      axios
+        .get(
+          `http://cors-anywhere.herokuapp.com/https://flickr.com/services/oembed/?format=json&url=${lien}`,
+        )
+        .then((response) => {
+          axios.post('http://localhost:8000/Image/modifImage', {
+            mediaId: state.lists.oldMedia.id,
+            lien,
+            titre: response.data.title,
+            auteur: response.data.author_name,
+            hauteur: response.data.height,
+            largeur: response.data.width,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      next(action);
+      break;
+    }
+    case MODIF_VIDEO: {
+      axios
+        .get(
+          `https://vimeo.com/api/oembed.json?url=${lien}`,
+        )
+        .then((response) => {
+          axios.post('http://localhost:8000/Video/modifVideo', {
+            mediaId: state.lists.oldMedia.id,
+            lien,
+            titre: response.data.title,
+            auteur: response.data.author_name,
+            hauteur: response.data.height,
+            largeur: response.data.width,
+            duree: response.data.duration,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      next(action);
+      break;
+    }
     case ADD_IMAGE: {
       axios
         .get(
           `http://cors-anywhere.herokuapp.com/https://flickr.com/services/oembed/?format=json&url=${lien}`,
         )
         .then((response) => {
-          console.log('here');
-          console.log(response);
           axios.post('http://localhost:8000/Image/createImage', {
             lien,
             titre: response.data.title,

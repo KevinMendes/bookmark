@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { deleteImage, deleteVideo } from '../actions/lists';
+import { deleteImage, deleteVideo, setOldMedia } from '../actions/lists';
 import Card from '../component/Card/Card';
 
 // == Data / state
@@ -9,6 +9,9 @@ const mapStateToProps = (state) => ({
 
 // == Actions / dispatch
 const mapDispatchToProps = (dispatch) => ({
+  setOldMedia: (posts) => {
+    dispatch(setOldMedia(posts));
+  },
   deleteVideo: (id) => {
     dispatch(deleteVideo(id));
   },

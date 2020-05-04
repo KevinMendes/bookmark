@@ -9,5 +9,6 @@ const router = express.Router();
 router.post('/createVideo', videoController.createVideo);
 router.post('/destroyVideo', videoController.destroyVideo);
 router.post('/allVideo', videoController.allVideo);
+router.post('/modifVideo', videoController.modifVideo);
 
 module.exports = router;

@@ -92,3 +92,29 @@ exports.allVideo = (req, res, next) => {
       console.log(err.message);
     });
 };
+
+exports.modifVideo = (req, res, next) => {
+  const lien = req.body.lien;
+  const titre = req.body.titre;
+  const auteur = req.body.auteur;
+  const hauteur = req.body.hauteur;
+  const largeur = req.body.largeur;
+  const duree = req.body.duree;
+  Image.update({
+    lien: lien,
+    titre: titre,
+    auteur: auteur,
+    hauteur: hauteur,
+    largeur: largeur,
+    duree: duree,
+  })
+    .then((video) => {
+      res.status(202).json({
+        message: "updated",
+        video,
+      });
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};

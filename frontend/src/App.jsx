@@ -11,10 +11,11 @@ import LoginForm from './containers/LoginForm';
 import InscriptionForm from './containers/InscriptionForm';
 import Lists from './containers/Lists';
 import AddList from './containers/AddList';
+import Modif from './containers/Modif';
 import './App.css';
 
 const App = ({
-  logged, loading, store, handleLoadVideos, handleLoadImages,
+  logged, loading, handleLoadVideos, handleLoadImages,
 }) => (
   <div className="App">
     {!logged && (
@@ -29,6 +30,9 @@ const App = ({
         <Switch>
           <Route path="/addList">
             <AddList />
+          </Route>
+          <Route path="/modif">
+            <Modif />
           </Route>
           {loading && (
             <div className="loading">
