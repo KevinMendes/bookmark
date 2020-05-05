@@ -13,6 +13,8 @@ export const MODIF_IMAGE = 'MODIF_IMAGE';
 export const MODIF_VIDEO = 'MODIF_VIDEO';
 export const ADD_TAG = 'ADD_TAG';
 export const SET_TAG = 'SET_TAG';
+export const DESTROY_TAG = 'DESTROY_TAG';
+export const MODIFY_TAG = 'MODIFY_TAG';
 
 // Creators
 export const setOldMedia = (posts) => ({
@@ -49,6 +51,11 @@ export const modifVideo = () => ({
   type: MODIF_VIDEO,
 });
 
+export const modifyTag = (id) => ({
+  type: MODIFY_TAG,
+  id,
+});
+
 export const addVideo = () => ({
   type: ADD_VIDEO,
 });
@@ -76,5 +83,10 @@ export const deleteVideo = (id) => ({
 
 export const deleteImage = (id) => ({
   type: DELETE_IMAGE,
+  id,
+});
+
+export const destroyTag = (id) => ({
+  type: DESTROY_TAG,
   id,
 });

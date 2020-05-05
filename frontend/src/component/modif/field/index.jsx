@@ -8,6 +8,7 @@ const Field = ({
   name,
   placeholder,
   onChange,
+  list,
 }) => {
   const handleChange = (evt) => {
     onChange(evt.target.value, name);
@@ -23,6 +24,7 @@ const Field = ({
         onChange={handleChange}
         // infos de base
         id={inputId}
+        list={list}
         type={type}
         className="field-input"
         placeholder={placeholder}
@@ -45,10 +47,12 @@ Field.propTypes = {
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  list: PropTypes.string,
 };
 
 // Valeurs par défaut pour les props
 Field.defaultProps = {
+  list: '',
   value: '',
   type: 'text',
 };

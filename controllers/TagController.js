@@ -57,6 +57,29 @@ exports.createTagImage = (req, res, next) => {
     });
 };
 
+exports.createTagVideo = (req, res, next) => {
+  const tag = req.body.tag;
+  const listVideoId = req.body.mediaId;
+  Tag.create({
+    tag: tag,
+  })
+    .then((result) => {
+      TagVideo.create({
+        tagId: result.id,
+        listvideoId: listVideoId,
+      });
+    })
+    .then((result) => {
+      res.status(201).json({
+        result,
+        success: true,
+      });
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
 exports.destroyTag = (req, res, next) => {
   id = req.body.tagId;
   console.log(id);
@@ -71,22 +94,35 @@ exports.destroyTag = (req, res, next) => {
     });
 };
 // récupération de toutes les Tags bookmark & tag associé
-exports.allTag = (req, res, next) => {
-  userId = req.body.userId;
+exports.allTagImage = (req, res, next) => {
+  mediaId = req.body.mediaId;
   Tag.findAll({
     attributes: ["tag", "id"],
-    [Op.and]: [
+    include: [
       {
-        include: [
-          ({
-            model: ListVideo,
-            where: { userId: userId },
-          },
-          {
-            model: ListImage,
-            where: { userId: userId },
-          }),
-        ],
+        model: ListImage,
+        where: { id: mediaId },
+      },
+    ],
+  })
+    .then((result) => {
+      res.status(202).json({
+        result,
+      });
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
+exports.allTagVideo = (req, res, next) => {
+  mediaId = req.body.mediaId;
+  Tag.findAll({
+    attributes: ["tag", "id"],
+    include: [
+      {
+        model: ListVideo,
+        where: { id: mediaId },
       },
     ],
   })

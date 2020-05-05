@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Pagination from './Pagination';
@@ -25,9 +26,8 @@ const VideoPagination = ({ videos }) => {
 };
 
 VideoPagination.propTypes = {
-  videos: PropTypes.arrayOf(PropTypes.number, PropTypes.string).isRequired,
-  // eslint-disable-next-line react/require-default-props
-  setCurrentVideoPage: PropTypes.number,
+  videos: PropTypes.array.isRequired,
 };
+
 
 export default VideoPagination;

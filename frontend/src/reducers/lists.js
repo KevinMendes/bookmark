@@ -12,6 +12,8 @@ import {
   MODIF_IMAGE,
   ADD_TAG,
   SET_TAG,
+  DESTROY_TAG,
+  MODIFY_TAG,
 } from '../actions/lists';
 
 // Initial State
@@ -27,7 +29,6 @@ const initialState = {
 
 // Reducer
 const listsReducer = (state = initialState, action = {}) => {
-  console.log(action);
   switch (action.type) {
     case SET_OLD_MEDIA:
       return {
@@ -79,12 +80,23 @@ const listsReducer = (state = initialState, action = {}) => {
         ...state,
         image: action.image,
       };
+    case MODIFY_TAG:
+      return {
+        ...state,
+        newTag: action.newTag,
+        id: action.id,
+      };
     case DELETE_VIDEO:
       return {
         ...state,
         id: action.id,
       };
     case DELETE_IMAGE:
+      return {
+        ...state,
+        id: action.id,
+      };
+    case DESTROY_TAG:
       return {
         ...state,
         id: action.id,

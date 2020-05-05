@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -15,8 +16,8 @@ const Card = ({
   }
   // eslint-disable-next-line no-param-reassign
   const createdAt = posts.createdAt.slice(0, 10);
-  const handleSetOldMedia = () => {
-    setOldMedia(posts);
+  const handleSetOldMedia = async () => {
+    await setOldMedia(posts);
   };
   const deleteMedia = (e) => {
     const mediaId = e.currentTarget.value.substring(6);
@@ -107,7 +108,7 @@ const Card = ({
 Card.propTypes = {
   deleteVideo: PropTypes.func.isRequired,
   deleteImage: PropTypes.func.isRequired,
-  posts: PropTypes.objectOf(PropTypes.number, PropTypes.string).isRequired,
+  posts: PropTypes.object.isRequired,
   setOldMedia: PropTypes.func.isRequired,
 };
 

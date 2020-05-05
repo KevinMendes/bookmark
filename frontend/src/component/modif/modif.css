@@ -7,11 +7,14 @@ h1 {
 }
 
 .modify-link {
-    width: 32vw;
+    width: 24vw;
 }
 .add-tag {
-    width: 32vw;
+    width: 24vw;
 }
 .delete-tag {
-    width: 32vw;
+    width: 24vw;
+}
+.modify-tag {
+    width: 24vw;
 }

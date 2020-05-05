@@ -7,6 +7,7 @@ import { loadVideos, loadImages } from '../actions/lists';
 const mapStateToProps = (state) => ({
   loading: state.auth.loading,
   logged: state.auth.logged,
+  oldMedia: state.lists.oldMedia,
 });
 
 // == Actions / dispatch

@@ -13,10 +13,14 @@ import {
   loadImages,
   MODIF_IMAGE,
   MODIF_VIDEO,
+  ADD_TAG,
+  DESTROY_TAG,
+  MODIFY_TAG,
 } from '../actions/lists';
 
 // Middleware
 const listMiddleware = (store) => (next) => (action) => {
+  const state = store.getState();
   let id = '';
   // Fonctions utilisées pour sauvegarder les stores dans le store via le then
   const saveVideos = (response) => {
@@ -25,7 +29,6 @@ const listMiddleware = (store) => (next) => (action) => {
   const saveImages = (response) => {
     store.dispatch(setImages(response.data.result));
   };
-  const state = store.getState();
   const lien = state.lists.media;
   // En fonction de l'action, je réagis
   switch (action.type) {
@@ -94,6 +97,35 @@ const listMiddleware = (store) => (next) => (action) => {
       next(action);
       break;
     }
+    case MODIFY_TAG: {
+      axios.post('http://localhost:8000/Tag/updateTag', {
+        newTag: state.lists.newTag,
+        tagId: action.id,
+      })
+        .catch((err) => {
+          console.log(err);
+        });
+      next(action);
+      break;
+    }
+    case ADD_TAG: {
+      if (state.lists.oldMedia.lien.indexOf('flickr') !== -1) {
+        axios.post('http://localhost:8000/Tag/createTagImage', {
+          tag: state.lists.newTag,
+          mediaId: state.lists.oldMedia.id,
+        });
+        window.location.replace('/');
+      } else {
+        axios.post('http://localhost:8000/Tag/createTagVideo', {
+          tag: state.lists.newTag,
+          mediaId: state.lists.oldMedia.id,
+        });
+        window.location.replace('/');
+        loadImages();
+        loadVideos();
+      }
+      break;
+    }
     case ADD_IMAGE: {
       axios.post('http://localhost:8000/Tag/createTag', {
         tag: state.lists.newTag,
@@ -139,6 +171,22 @@ const listMiddleware = (store) => (next) => (action) => {
             userId: state.auth.userId,
             tagId: state.lists.tag,
           });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      next(action);
+      break;
+    }
+    case DESTROY_TAG: {
+      axios
+        .post('http://localhost:8000/Tag/destroyTag', {
+          tagId: action.id,
+        })
+        .then(() => {
+          store.dispatch(loadVideos());
+          store.dispatch(loadImages());
         })
         .catch((err) => {
           console.log(err);

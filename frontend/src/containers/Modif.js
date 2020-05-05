@@ -1,7 +1,9 @@
 import { connect } from 'react-redux';
 
 import Modif from '../component/modif/Modif';
-import { changeField, modifImage, addTag } from '../actions/lists';
+import {
+  changeField, modifImage, addTag, destroyTag, modifyTag,
+} from '../actions/lists';
 // == Data / state
 const mapStateToProps = (state) => ({
   userId: state.auth.userId,
@@ -20,6 +22,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   addTag: () => {
     dispatch(addTag());
+  },
+  destroyTag: (id) => {
+    dispatch(destroyTag(id));
+  },
+  modifyTag: (id) => {
+    dispatch(modifyTag(id));
   },
 });
 

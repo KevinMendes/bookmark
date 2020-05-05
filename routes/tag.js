@@ -6,8 +6,10 @@ const router = express.Router();
 // création des routes
 router.post('/createTagImage', tagController.createTagImage);
 router.post('/destroyTag', tagController.destroyTag);
-router.get('/allTag', tagController.allTag);
+router.post('/allTagImage', tagController.allTagImage);
+router.post('/allTagVideo', tagController.allTagVideo);
 router.post('/updateTag', tagController.updateTag);
+router.post('/createTagVideo', tagController.createTagVideo);
 
 
 module.exports = router;

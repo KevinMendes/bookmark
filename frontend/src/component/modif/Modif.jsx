@@ -1,21 +1,31 @@
+/* eslint-disable react/require-default-props */
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Button } from 'react-bootstrap';
 import Field from './field/index';
 import './modif.css';
 
-const Modif = (
-  {
-    changeField,
-    media,
-    modifVideo,
-    modifImage,
-    oldMedia,
-    newTag,
-    addTag,
-  },
-) => {
+const Modif = ({
+  changeField,
+  media,
+  modifVideo,
+  modifImage,
+  oldMedia,
+  newTag,
+  addTag,
+  destroyTag,
+  modifyTag,
+}) => {
+  const handleModifyTag = (e) => {
+    e.preventDefault();
+    modifyTag(e.currentTarget.value);
+  };
+  const deleteTag = (e) => {
+    destroyTag(e.currentTarget.value);
+  };
   const handleSubmit = () => {
     if (media.indexOf('flickr') !== -1) {
       modifImage();
@@ -40,11 +50,13 @@ const Modif = (
       <div className="modify-link">
         <p>
           Titre du lien :
-          {' '}
           {oldMedia.titre}
         </p>
 
-        <p className="alter"> Insérer un nouveau lien pour modifier l'entrée :</p>
+        <p className="alter">
+          {' '}
+          Insérer un nouveau lien pour modifier l'entrée :
+        </p>
         <form
           autoComplete="off"
           className="addList-form-element"
@@ -73,14 +85,39 @@ const Modif = (
           onChange={changeField}
           value={newTag}
         />
-        <Link to="/" onClick={handleAddTag}>
-          <button type="submit" className="login-form-button">
-            OK
-          </button>
-        </Link>
+        <button type="submit" className="login-form-button" onClick={handleAddTag}>
+          OK
+        </button>
       </div>
       <div className="delete-tag">
         <h1>Supprimer un tag lié à ce média</h1>
+        {oldMedia.tags.map((tag) => (
+          <Button key={`d${tag.tag}`} variant="danger" value={tag.id} onClick={deleteTag}>
+            {tag.tag}
+            {' '}
+          </Button>
+        ))}
+      </div>
+      <div className="modify-tag">
+        {oldMedia.tags.map((tag) => (
+          <form key={tag.tag}>
+            {tag.tag}
+            {' '}
+            Modifier ce tag :
+            {' '}
+            <Field
+              name="newTag"
+              placeholder="NouveauTag"
+              list={tag.tag}
+              type="text"
+              onChange={changeField}
+              value={newTag}
+            />
+            <button type="submit" className="login-form-button" value={tag.id} onClick={handleModifyTag}>
+              OK
+            </button>
+          </form>
+        ))}
       </div>
     </div>
   );
@@ -88,11 +125,13 @@ const Modif = (
 
 Modif.propTypes = {
   changeField: PropTypes.func.isRequired,
-  modifVideo: PropTypes.func.isRequired,
-  oldMedia: PropTypes.objectOf(PropTypes.number, PropTypes.string).isRequired,
+  modifVideo: PropTypes.func,
+  oldMedia: PropTypes.object.isRequired,
   media: PropTypes.string.isRequired,
-  modifImage: PropTypes.func.isRequired,
+  modifImage: PropTypes.func,
   newTag: PropTypes.string.isRequired,
+  destroyTag: PropTypes.func.isRequired,
   addTag: PropTypes.func.isRequired,
+  modifyTag: PropTypes.func.isRequired,
 };
 export default Modif;
